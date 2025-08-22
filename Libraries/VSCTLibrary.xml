@@ -1,0 +1,2600 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>VSCTLibrary</name>
+    </assembly>
+    <members>
+        <member name="T:Microsoft.VisualStudio.CommandTable.AssemblyResources">
+            <summary>
+            This class provides access to the assembly's resources.
+            </summary>
+        </member>
+        <member name="M:Microsoft.VisualStudio.CommandTable.AssemblyResources.GetString(System.String)">
+            <summary>
+            Loads the specified resource string, either from the assembly's primary resources, or its shared resources.
+            </summary>
+            <remarks>This method is thread-safe.</remarks>
+            <param name="name"></param>
+            <returns>The resource string, or null if not found.</returns>
+        </member>
+        <member name="T:Microsoft.VisualStudio.CommandTable.BinaryReadCTCStream">
+            <summary>
+            Summary description for BinaryStream.
+            </summary>
+        </member>
+        <member name="T:Microsoft.VisualStudio.CommandTable.BinaryWriteCTCStream">
+            <summary>
+            Summary description for BinaryWriteCTCStream.
+             
+            TODO: This object does not yet support the compressor required to produce
+                  the new binary format.
+            </summary>
+        </member>
+        <member name="M:Microsoft.VisualStudio.CommandTable.BinaryWriteCTCStream.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Microsoft.VisualStudio.CommandTable.CommandItem">
+            <summary>
+            Summary description for CommandItem.
+            </summary>
+            
+        </member>
+        <member name="M:Microsoft.VisualStudio.CommandTable.CommandItem.GetStringList(System.Globalization.CultureInfo)">
+            <summary>
+            Get the stringlist for the specific culture
+            </summary>
+            <param name="culture"></param>
+            <returns>If the culture is not available this method returns null</returns>
+        </member>
+        <member name="M:Microsoft.VisualStudio.CommandTable.CommandItem.CreateStringList(System.Globalization.CultureInfo)">
+            <summary>
+            This will create or replace with a new string list for the specified culture
+            </summary>
+            <param name="culture"></param>
+            <returns>The new string list for the culture filled with empty strings</returns>
+        </member>
+        <member name="M:Microsoft.VisualStudio.CommandTable.CommandItem.Translate(Microsoft.VisualStudio.CommandTable.CommandTable,Microsoft.VisualStudio.CommandTable.CommandTable)">
+            <summary>
+            Use this only after a clone operation when this item is being moved from one command table to another.
+            </summary>
+            <param name="ctFrom"></param>
+            <param name="ctTo"></param>
+        </member>
+        <member name="T:Microsoft.VisualStudio.CommandTable.CommandTable">
+            <summary>
+            The CommandTable object provides services to read, write and manipulate menus, buttons, toolbars and keybindings used visual studio
+            </summary>
+        </member>
+        <member name="T:Microsoft.VisualStudio.CommandTable.CommandTable.SortAndValidateDelay">
+            <summary>
+            This class ensures that if many methods do mutations to a command table (in a possibly nested manner) sorting and validation
+            is done only after the last modifier is finished. Further it ensures that all messages produced during the modifications go to the 
+            outermost provided <see cref="T:Microsoft.VisualStudio.CommandTable.IMessageProcessor" /> for a given unique <see cref="T:Microsoft.VisualStudio.CommandTable.CommandTable" />. It provides concurrency exclusion 
+            for distinct command tables such that modifications of unrelated command tables on multiple threads will not interfere with each other. 
+            It does NOT allow for one to safely do concurrent mutation of the same command table on multiple threads.
+            </summary>
+        </member>
+        <member name="T:Microsoft.VisualStudio.CommandTable.CommandTable.ListMember">
+            <summary>
+            This class is used to associate the type of a member field to the field
+            so that it can be instantiated from knowing its name.
+            </summary>
+        </member>
+        <member name="M:Microsoft.VisualStudio.CommandTable.CommandTable.Save(System.String,Microsoft.VisualStudio.CommandTable.SaveOptions,Microsoft.VisualStudio.CommandTable.IMessageProcessor)">
+            <summary>
+            The culture supplied to the SaveOptions will select the strings to be written to the chosen format
+            If an item does not have strings that match the culture a best match will be chosen.
+            </summary>
+        </member>
+        <member name="M:Microsoft.VisualStudio.CommandTable.CommandTable.AddAdditionalIncludes(System.String[])">
+            <summary>
+            If external references are specified in the file for #include, Include elements, or bitmap references, add their possible
+            locations prior to reading the file.
+            </summary>
+            <param name="additionalIncludes"></param>
+        </member>
+        <member name="M:Microsoft.VisualStudio.CommandTable.CommandTable.AddAdditionalPreprocessorDefines(System.Collections.Specialized.StringCollection)">
+            <summary>
+            If additional preprocessor #defines are required specify them prior to reading the file.
+            </summary>
+            <param name="additionalDefines"></param>
+        </member>
+        <member name="P:Microsoft.VisualStudio.CommandTable.CommandTable.PreprocessorPath">
+            <summary>
+            Specify the location of the preprocessor used to evaluate macros and traverse dependencies.  (cl.exe)
+            </summary>
+        </member>
+        <member name="P:Microsoft.VisualStudio.CommandTable.CommandTable.CodePage">
+            <summary>
+            Specify the code page of a text file that will be used to convert the characters to unicode.
+            </summary>
+        </member>
+        <member name="M:Microsoft.VisualStudio.CommandTable.CommandTable.Read(System.Byte[],System.String,Microsoft.VisualStudio.CommandTable.IMessageProcessor)">
+            <summary>
+            Load a command table directly from a byte[].  The source must be specified for tracking purposes
+            and be unique across all command tables if this is done for a merge.
+            Bitmap resources for commands should have been embedded directly in the command table itself,
+            otherwise neither VS nor command table tools will be able to locate them.
+            </summary>
+            <param name="data">Complete command table binary with embedded bitmaps</param>
+            <param name="source">Unique descriptive identifier for the origin of this command table data</param>
+            <param name="errorProcessor"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.VisualStudio.CommandTable.CommandTable.Read(System.Byte[],System.String,Microsoft.VisualStudio.CommandTable.ReadOptions,Microsoft.VisualStudio.CommandTable.IMessageProcessor)">
+            <summary>
+            Load a command table directly from a byte[].  The source must be specified for tracking purposes
+            and be unique across all command tables if this is done for a merge.
+            Bitmap resources for commands should have been embedded directly in the command table itself,
+            otherwise neither VS nor command table tools will be able to locate them.
+            </summary>
+            <param name="data">Complete command table binary with embedded bitmaps</param>
+            <param name="source">Unique descriptive identifier for the origin of this command table data</param>
+            <param name="ro"></param>
+            <param name="errorProcessor"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.VisualStudio.CommandTable.CommandTable.Read(System.Reflection.Assembly,Microsoft.VisualStudio.CommandTable.IMessageProcessor)">
+            <summary>
+            The purpose of this method is to load a command table from an assembly in the GAC, in this case
+            bitmap resources for commands should have been embedded directly in the command table itself,
+            otherwise neither VS nor nor command table tools will be able to locate them.
+            This function wraps Read with ReadOptions behavior by picking the AutoDetect save options and will look for
+            the command table by a resource name that ends in ".ctmenu" or any byte[] that looks like a command table.
+            </summary>
+            <param name="assembly"></param>
+            <param name="errorProcessor"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.VisualStudio.CommandTable.CommandTable.Read(System.Reflection.Assembly,Microsoft.VisualStudio.CommandTable.ReadOptions,Microsoft.VisualStudio.CommandTable.IMessageProcessor)">
+            <summary>
+            The purpose of this method is to load a command table from an assembly in the GAC, in this case
+            bitmap resources for commands should have been embedded directly in the command table itself,
+            otherwise neither VS nor command table tools will be able to locate them.
+            </summary>
+            <param name="assembly"></param>
+            <param name="ro"></param>
+            <param name="errorProcessor"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.VisualStudio.CommandTable.CommandTable.Read(System.String,Microsoft.VisualStudio.CommandTable.IMessageProcessor,System.String)">
+            <summary>
+            Read a command table into memory.  The culture of the command table will be picked up in the data if any is indicated.  The specific
+            culture to be written when saved must be passed in the SaveOptions for formats that only permit a
+            single culture.
+            </summary>
+            <param name="fileName">file name</param>
+            <param name="errorProcessor">message processor</param>
+            <param name="resouceID">resource id</param>
+            <returns>return true if success</returns>
+        </member>
+        <member name="M:Microsoft.VisualStudio.CommandTable.CommandTable.Read(System.String,Microsoft.VisualStudio.CommandTable.IMessageProcessor)">
+            <summary>
+            Read a command table into memory.  The culture of the command table will be picked up in the data if any is indicated.  The specific
+            culture to be written when saved must be passed in the SaveOptions for formats that only permit a
+            single culture.
+            </summary>
+            <param name="fileName"></param>
+            <param name="errorProcessor"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.VisualStudio.CommandTable.CommandTable.Read(System.String,System.String,Microsoft.VisualStudio.CommandTable.IMessageProcessor)">
+            <summary>
+            Read a command table into memory.  The culture of the command table will be picked up in the data if any is indicated.  The specific
+            culture to be written when saved must be passed in the SaveOptions for formats that only permit a
+            single culture.
+            </summary>
+            <param name="fileName"></param>
+            <param name="resourceName"></param>
+            <param name="errorProcessor"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.VisualStudio.CommandTable.CommandTable.Read(System.String,Microsoft.VisualStudio.CommandTable.ReadOptions,Microsoft.VisualStudio.CommandTable.IMessageProcessor)">
+            <summary>
+            Read a command table into memory.  The culture of the command table will be picked up in the data if any is indicated.  The specific
+            culture to be written when saved must be passed in the SaveOptions for formats that only permit a
+            single culture.
+            </summary>
+            <param name="fileName"></param>
+            <param name="ro"></param>
+            <param name="errorProcessor"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.VisualStudio.CommandTable.CommandTable.Read(Microsoft.VisualStudio.CommandTable.TextReadVSCTCStream)">
+            <summary>
+            Read the xml format of a CTC file.  The stream object should be initialized with the file to be used
+            and the error reporting interface set to an appropriate implementing object.
+            </summary>
+            <param name="s"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.VisualStudio.CommandTable.CommandTable.Read(Microsoft.VisualStudio.CommandTable.TextReadCTCStream)">
+            <summary>
+            Read the text format of a CTC file.  The stream object should be initialized with the file to be used
+            and the error reporting interface set to an appropriate implementing object.
+            </summary>
+            <param name="s"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.VisualStudio.CommandTable.CommandTable.EmitHeaderSymbols(System.String,System.String)">
+            <summary>
+            Emit a c++ header file that contains the symbols for objects defined in this command table
+            if the symbols file is null or empty, the symbols that are already contained in this
+            table will be used if any.
+            </summary>
+            <param name="symbolsFile"></param>
+            <param name="outputHeaderName"></param>
+        </member>
+        <member name="M:Microsoft.VisualStudio.CommandTable.CommandTable.CreateItemSnippet(Microsoft.VisualStudio.CommandTable.Item)">
+            <summary>
+            
+            </summary>
+            <param name="item"></param>
+            <returns>Returns a string containing the xml for the item</returns>
+        </member>
+        <member name="M:Microsoft.VisualStudio.CommandTable.CommandTable.GetIndexedItem(System.UInt16,System.UInt32)">
+            <summary>
+            Retrieve a CommandItem from the index by a Guid:ID
+            </summary>
+            <param name="gidItem"></param>
+            <param name="idItem"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.VisualStudio.CommandTable.CommandTable.GetCommandPackage(System.UInt16,System.UInt32,System.Guid@)">
+            <summary>
+            GetCommandPackage will return the guid that the command indicates as
+            its auto load package.  The package will be loaded when the status
+            of the command is required by DynamicVisibillty or if it is executed.
+            </summary>
+            <param name="gidCommand"></param>
+            <param name="idCommand"></param>
+            <param name="guidPackage"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.VisualStudio.CommandTable.CommandTable.GetParent(System.UInt16,System.UInt32)">
+            <summary>
+            GetParent will return a CommandItem of a menus or groups that is the
+            specific parent from the item definition
+            </summary>
+            <param name="gidItem"></param>
+            <param name="idItem"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.VisualStudio.CommandTable.CommandTable.GetPlacements(System.UInt16,System.UInt32)">
+            <summary>
+            GetParents will return a CommandItem[] of all menus or groups that have
+            the specified item as its direct parent.  This will include the specific
+            parent from the item definition as well as any placement that causes it
+            to be a child of some other menu or group.
+            </summary>
+            <param name="gidItem"></param>
+            <param name="idItem"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.VisualStudio.CommandTable.CommandTable.GetChildren(System.UInt16,System.UInt32)">
+            <summary>
+            Get children will return a CommandItems[] of all children of the indicated item
+            where the child was defined with a specific parent or there was a placement
+            that caused it to be a child.  The result array will be sorted by priority drawn
+            either from the definition of the child or its placement.
+            </summary>
+            <param name="gidItem"></param>
+            <param name="idItem"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.VisualStudio.CommandTable.CommandTable.GetKeyBindings(System.UInt16,System.UInt32)">
+            <summary>
+            GetKeyBindings will return a CommandKeyBinding[] of all keyboard binding objects 
+            for a command
+            </summary>
+            <param name="gidItem"></param>
+            <param name="idItem"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.VisualStudio.CommandTable.CommandTable.GetVisibilities(System.UInt16,System.UInt32)">
+            <summary>
+            GetVisibilities will return a VisibilityItem[] of all visibility objects 
+            for a command
+            </summary>
+            <param name="gidItem"></param>
+            <param name="idItem"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.VisualStudio.CommandTable.CommandTable.GetUsed(System.UInt16,System.UInt32)">
+            <summary>
+            GetUsed will return a UsedCommandItem[] of all instances of UsedCommandItem
+            for a command, if the array is of non zero length then at least one command table
+            lists it as being used.  If there is more than one entry they will differ only in
+            the sourceID which can be evaluated with GetCommandTableInfo()
+            </summary>
+            <param name="gidItem"></param>
+            <param name="idItem"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.VisualStudio.CommandTable.CommandTable.GetIDFromGuid(System.Guid)">
+            <summary>
+            Get the ID for a guid in this command table.  If the guid is not in the table the return will be zero which is an invalid guid ID.
+            This is a lookup into a hash by the guid for optimal performance.
+            </summary>
+            <param name="guid"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.VisualStudio.CommandTable.CommandTable.GetGuidFromID(System.UInt16)">
+            <summary>
+            Get the guid for an ID in this command table.  If the id is not used, the return will be Guid.Empty.
+            The lookup for the guid by it ID is linear through the list.
+            </summary>
+            <param name="guid"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.VisualStudio.CommandTable.CommandTable.FindGuidSymbol(System.Guid)">
+            <summary>
+            Look up the symbolic name for a guid in this command table.  If it does not exist the return value will be null.
+            </summary>
+            <param name="guid"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.VisualStudio.CommandTable.CommandTable.RenameGuidSymbol(System.Guid,System.String)">
+            <summary>
+            Change the symbolic name of a guid in this command table.  The guid must already exist in the table.
+            </summary>
+            <param name="guid"></param>
+            <param name="newname"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.VisualStudio.CommandTable.CommandTable.FindIDSymbol(System.Guid,System.UInt32)">
+            <summary>
+            Find the symbolic name for an ID in the command table.  All ID's must be in the context of a guid.   If the
+            ID is not found the return value will be null.
+            </summary>
+            <param name="guid"></param>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.VisualStudio.CommandTable.CommandTable.GetGuidSymbols">
+            <summary>
+            Get all of the symbolic names for all of the guids used in this command table.
+            </summary>
+            <param name="guid"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.VisualStudio.CommandTable.CommandTable.GetIDSymbols(System.Guid)">
+            <summary>
+            Get all of the symbolic names for all of the ID's in the context of a particular guid in this command table.
+            </summary>
+            <param name="guid"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.VisualStudio.CommandTable.CommandTable.FindSymbolGuid(System.String)">
+            <summary>
+            Look up a guid from this command table by it's symbolic name.  If the symbol is not known, Guid.Empy will be returned.
+            </summary>
+            <param name="symbol"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.VisualStudio.CommandTable.CommandTable.FindSymbolID(System.Guid,System.String,System.UInt32@)">
+            <summary>
+            Look up the ID for a symbol given the guid for its scope.
+            </summary>
+            <param name="guid"></param>
+            <param name="symbol"></param>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.VisualStudio.CommandTable.CommandTable.AddGuidSymbol(System.Guid,System.String)">
+            <summary>
+            Add a symbolic name for a guid to the command table.  If this guid already has a name this will only be a temporary alias.
+            When written, only the first name provided for the guid will be used.  To rename a guid, use RenameGuidSymbol.
+            </summary>
+            <param name="guid"></param>
+            <param name="symbol"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.VisualStudio.CommandTable.CommandTable.TranslateID(Microsoft.VisualStudio.CommandTable.CommandTable,System.UInt16,System.UInt32)">
+            <summary>
+            TranslateGID will convert the GID from the source table into a GID in the local table and import its symbolic name
+            optionally it will also transport the symbol for an ID in that external scope.  
+            </summary>
+            <param name="ctSource"></param>
+            <param name="importGID"></param>
+            <returns>The translated GID.  The ID value if passed does not change, only the symbol is transported</returns>
+        </member>
+        <member name="M:Microsoft.VisualStudio.CommandTable.CommandTable.AddIDSymbol(System.Guid,System.UInt32,System.String)">
+            <summary>
+            Add a symbolic name for an ID.  The context of the ID must be provided an must have previously exist in the 
+            table or added by a call to AddGuidSymbol.
+            </summary>
+            <param name="guid"></param>
+            <param name="id"></param>
+            <param name="symbol"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.VisualStudio.CommandTable.CommandTable.RenameIDSymbol(System.Guid,System.UInt32,System.String)">
+            <summary>
+            Rename an ID in the context of a guid.  The ID must previously exist in the table or the return will be 'false'.
+            </summary>
+            <param name="guid"></param>
+            <param name="id"></param>
+            <param name="symbol"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.VisualStudio.CommandTable.CommandTable.CreateButton(System.UInt16,System.UInt16,System.UInt32,System.UInt16,System.UInt32,System.UInt32)">
+            <summary>
+            Create and add a button to the command table.  Upon return the button will be added to the button list but it will not yet
+            be indexed.  Since it is an expensive operation this is left to the viewer/editor to do as is prudent.  This allows for the
+            add range type operations and can allow for a delay refresh of displayed content.
+            To update the index call CommandTable.Build index and refresh appropriate content.
+            
+            Text information should be be added to the item directly following creation.
+            </summary>
+            <param name="gidPackage"></param>
+            <param name="gidItem"></param>
+            <param name="idItem"></param>
+            <param name="gidParent"></param>
+            <param name="idParent"></param>
+            <param name="priority"></param>
+            <returns>CommandButton</returns>
+        </member>
+        <member name="M:Microsoft.VisualStudio.CommandTable.CommandTable.CreateCombo(System.UInt16,System.UInt16,System.UInt32,System.UInt16,System.UInt32,System.UInt32)">
+             <summary>
+             Create and add a combo to the command table.  Upon return the button will be added to the combo list but it will not yet
+             be indexed.  Since it is an expensive operation this is left to the viewer/editor to do as is prudent.  This allows for the
+             add range type operations and can allow for a delay refresh of displayed content.
+             To update the index call CommandTable.Build index and refresh appropriate content.
+            
+             Text information should be be added to the item directly following creation.
+             </summary>
+             <param name="gidPackage"></param>
+             <param name="gidItem"></param>
+             <param name="idItem"></param>
+             <param name="gidParent"></param>
+             <param name="idParent"></param>
+             <param name="priority"></param>
+             <returns>CommandCombo</returns>
+        </member>
+        <member name="M:Microsoft.VisualStudio.CommandTable.CommandTable.CreateMenu(System.UInt16,System.UInt16,System.UInt32,System.UInt16,System.UInt32,System.UInt32)">
+            <summary>
+            Create and add a menu to the command table.  Upon the return the menu will have been added to the menus list but it will not
+            yet be indexed.  Since it is an expensive operation this is left to the viewer/editor to do as is prudent.  This allows for the
+            add range type operations and can allow for a delay refresh of displayed content.
+            To update the index call CommandTable.Build index and refresh appropriate content.
+            
+            Text information should be be added to the item directly following creation.
+            </summary>
+            <param name="gidPackage"></param>
+            <param name="gidItem"></param>
+            <param name="idItem"></param>
+            <param name="gidParent"></param>
+            <param name="idParent"></param>
+            <param name="priority"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.VisualStudio.CommandTable.CommandTable.CreateGroup(System.UInt16,System.UInt32,System.UInt16,System.UInt32,System.UInt32)">
+            <summary>
+            Create and add a group to the command table.  Upon the return the group will have been added to the groups list but it will not
+            yet be indexed.  Since it is an expensive operation this is left to the viewer/editor to do as is prudent.  This allows for the
+            add range type operations and can allow for a delay refresh of displayed content.
+            To update the index call CommandTable.Build index and refresh appropriate content.
+            </summary>
+            <param name="gidItem"></param>
+            <param name="idItem"></param>
+            <param name="gidParent"></param>
+            <param name="idParent"></param>
+            <param name="priority"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.VisualStudio.CommandTable.CommandTable.CreateBitmap(System.UInt16,System.UInt32)">
+            <summary>
+            Create a bitmap strip item and add it to the command table.  Upon return the item will be added to the table but it will
+            not have any images 
+            </summary>
+            <param name="gidBitmap"></param>
+            <param name="idResource"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.VisualStudio.CommandTable.CommandTable.CreateBitmap(System.UInt16,System.String)">
+            <summary>
+            Create a bitmap strip item and add it to the command table.  Upon return the item will be added to the table but it will
+            not have any images 
+            </summary>
+            <param name="gidBitmap"></param>
+            <param name="idResource"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.VisualStudio.CommandTable.CommandTable.CreateKeyBinding(System.UInt16,System.UInt32,System.UInt16,System.UInt16)">
+            <summary>
+            Create a keybinding item and add it to the command table.
+            </summary>
+            <param name="gidItem"></param>
+            <param name="idItem"></param>
+            <param name="gidEditor"></param>
+            <param name="gidEmulator"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.VisualStudio.CommandTable.CommandTable.CreateVisibility(System.UInt16,System.UInt32,System.UInt16)">
+            <summary>
+            Create a visibility item and add it to the command table.
+            </summary>
+            <param name="gidBitmap"></param>
+            <param name="idResource"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.VisualStudio.CommandTable.CommandTable.ImportExternalItem(Microsoft.VisualStudio.CommandTable.CommandTable,Microsoft.VisualStudio.CommandTable.Item)">
+            <summary>
+            Import a command item from an external source and translate it into local ID's and symbols
+            after importing, the index must be rebuilt via BuildIndex
+            </summary>
+            <param name="ctExternal"></param>
+            <param name="itemExternal"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Microsoft.VisualStudio.CommandTable.CommandTableCompiler">
+            <summary>
+            Summary description for CommandTableCompiler.
+            </summary>
+        </member>
+        <member name="M:Microsoft.VisualStudio.CommandTable.CommandTableCompiler.Compile(System.String,System.Int32,System.String,System.String,System.Collections.Specialized.StringCollection,System.Collections.Specialized.StringCollection,System.String)">
+            <summary>
+            Compiling the CTC requires the following steps.
+            1. Launch the preprocessor on the input file into a temp file
+            2. Parse the result into data structures
+            3. Write the binary format
+            </summary>
+            <param name="fileInput"></param>
+            <param name="path"></param>
+        </member>
+        <member name="P:Microsoft.VisualStudio.CommandTable.DeflateCompressor.EOF">
+            <summary>
+            Checking possitions in this EOF here is not possible.   DeflateStream EOF can only be detected
+            by an overread.   We will always return false here and the caller must interpret
+            whether the EOS exception occurs at an invalid point.
+            </summary>
+        </member>
+        <member name="T:Microsoft.VisualStudio.CommandTable.Conditionals.AndExpressionNode">
+             
+             Class:   AndExpressionNode
+             Owner:   DavidLe
+             
+             Evaluates as:  Boolean
+             Evaluates children as: Boolean
+            
+             Does NOT update conditioned properties table.
+            
+             
+        </member>
+        <member name="F:Microsoft.VisualStudio.CommandTable.Conditionals.AndExpressionNode.expressionTree">
+            <summary>
+            Expression tree to display in error messages
+            </summary>
+        </member>
+        <member name="M:Microsoft.VisualStudio.CommandTable.Conditionals.AndExpressionNode.#ctor(Microsoft.VisualStudio.CommandTable.Conditionals.ExpressionTree)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="expressionTree">Expression tree to display in error messages</param>
+        </member>
+        <member name="T:Microsoft.VisualStudio.CommandTable.Conditionals.ConversionUtilities">
+            <summary>
+            This class contains only static methods, which are useful throughout many
+            of the MSBuild classes and don't really belong in any specific class.   
+            </summary>
+        </member>
+        <member name="M:Microsoft.VisualStudio.CommandTable.Conditionals.ConversionUtilities.ConvertStringToBool(System.String)">
+            <summary>
+            Converts a string to a bool.  We consider "true/false", "on/off", and 
+            "yes/no" to be valid boolean representations in the XML.
+            </summary>
+            <param name="parameterValue">The string to convert.</param>
+            <returns>Boolean true or false, corresponding to the string.</returns>
+        </member>
+        <member name="M:Microsoft.VisualStudio.CommandTable.Conditionals.ConversionUtilities.CanConvertStringToBool(System.String)">
+            <summary>
+            Determines whether a string can be successfully converted to a bool.
+            </summary>
+            <param name="parameterValue">The string to convert.</param>
+            <returns>Boolean true or false, telling whether or not the string can be converted.</returns>
+        </member>
+        <member name="T:Microsoft.VisualStudio.CommandTable.Conditionals.EqualExpressionNode">
+             
+             Class:   EqualExpressionNode
+             Owner:   DavidLe
+             
+             Evaluates as:  Boolean
+             Evaluates children as: Numeric, boolean, or string
+            
+             Updates conditioned properties table.
+            
+             This node first tries to compare it's children as numerics.  If both
+             support it, numeric equality is tested.  If both don't support numeric
+             values, they are queried if they are both valid boolean values.  If both
+             aren't valid boolean values, then a standard string comparison is done.
+            
+        </member>
+        <member name="T:Microsoft.VisualStudio.CommandTable.Conditionals.ErrorUtilities">
+            <summary>
+            This class contains methods that are useful for error checking and validation.
+            </summary>
+            <owner>RGoel, SumedhK</owner>
+        </member>
+        <member name="M:Microsoft.VisualStudio.CommandTable.Conditionals.ErrorUtilities.ThrowInternalError(System.Boolean,System.String,System.Object[])">
+            <summary>
+            Puts up an assertion dialog in debug builds, and throws an exception in
+            both debug and release builds. Since this is not a no-op in release builds,
+            it should not be called repeatedly in performance-critical scenarios.
+            
+            PERF WARNING: calling a method that takes a variable number of arguments
+            is expensive, because memory is allocated for the array of arguments -- do
+            not call this method repeatedly in performance-critical scenarios
+            </summary>
+            <owner>RGoel, SumedhK</owner>
+            <param name="showAssert"></param>
+            <param name="unformattedMessage"></param>
+            <param name="args"></param>
+        </member>
+        <member name="M:Microsoft.VisualStudio.CommandTable.Conditionals.ErrorUtilities.VerifyThrowNoAssert(System.Boolean,System.String)">
+            <summary>
+            Throws an InternalErrorException if the given condition is false,
+            without showing an assert dialog. Use this method only for conditions
+            that mean bugs in MSBuild code (that is, not expected user exceptions).
+            </summary>
+            <param name="condition"></param>
+            <param name="unformattedMessage"></param>
+        </member>
+        <member name="M:Microsoft.VisualStudio.CommandTable.Conditionals.ErrorUtilities.VerifyThrow(System.Boolean,System.String)">
+            <summary>
+            This method should be used in places where one would normally put
+            an "assert". It should be used to validate that our assumptions are
+            true, where false would indicate that there must be a bug in our
+            code somewhere. This should not be used to throw errors based on bad
+            user input or anything that the user did wrong.
+            </summary>
+            <owner>RGoel, SumedhK</owner>
+            <param name="condition"></param>
+            <param name="unformattedMessage"></param>
+        </member>
+        <member name="M:Microsoft.VisualStudio.CommandTable.Conditionals.ErrorUtilities.VerifyThrow(System.Boolean,System.String,System.Object)">
+            <summary>
+            Overload for one string format argument.
+            </summary>
+            <owner>SumedhK</owner>
+            <param name="condition"></param>
+            <param name="unformattedMessage"></param>
+            <param name="arg0"></param>
+        </member>
+        <member name="M:Microsoft.VisualStudio.CommandTable.Conditionals.ErrorUtilities.VerifyThrow(System.Boolean,System.String,System.Object,System.Object)">
+            <summary>
+            Overload for two string format arguments.
+            </summary>
+            <owner>SumedhK</owner>
+            <param name="condition"></param>
+            <param name="unformattedMessage"></param>
+            <param name="arg0"></param>
+            <param name="arg1"></param>
+        </member>
+        <member name="M:Microsoft.VisualStudio.CommandTable.Conditionals.ErrorUtilities.VerifyThrow(System.Boolean,System.String,System.Object,System.Object,System.Object)">
+            <summary>
+            Overload for three string format arguments.
+            </summary>
+            <owner>SumedhK</owner>
+            <param name="condition"></param>
+            <param name="unformattedMessage"></param>
+            <param name="arg0"></param>
+            <param name="arg1"></param>
+            <param name="arg2"></param>
+        </member>
+        <member name="M:Microsoft.VisualStudio.CommandTable.Conditionals.ErrorUtilities.VerifyThrow(System.Boolean,System.String,System.Object,System.Object,System.Object,System.Object)">
+            <summary>
+            Overload for four string format arguments.
+            </summary>
+            <owner>SumedhK</owner>
+            <param name="condition"></param>
+            <param name="unformattedMessage"></param>
+            <param name="arg0"></param>
+            <param name="arg1"></param>
+            <param name="arg2"></param>
+            <param name="arg3"></param>
+        </member>
+        <member name="M:Microsoft.VisualStudio.CommandTable.Conditionals.ErrorUtilities.ThrowInvalidOperation(System.String,System.Object[])">
+            <summary>
+            Throws an InvalidOperationException.
+            
+            PERF WARNING: calling a method that takes a variable number of arguments
+            is expensive, because memory is allocated for the array of arguments -- do
+            not call this method repeatedly in performance-critical scenarios
+            </summary>
+            <owner>RGoel, SumedhK</owner>
+            <param name="resourceName"></param>
+            <param name="args"></param>
+        </member>
+        <member name="M:Microsoft.VisualStudio.CommandTable.Conditionals.ErrorUtilities.VerifyThrowInvalidOperation(System.Boolean,System.String)">
+            <summary>
+            Throws an InvalidOperationException if the given condition is false.
+            </summary>
+            <owner>RGoel, SumedhK</owner>
+            <param name="condition"></param>
+            <param name="resourceName"></param>
+        </member>
+        <member name="M:Microsoft.VisualStudio.CommandTable.Conditionals.ErrorUtilities.VerifyThrowInvalidOperation(System.Boolean,System.String,System.Object)">
+            <summary>
+            Overload for one string format argument.
+            </summary>
+            <owner>SumedhK</owner>
+            <param name="condition"></param>
+            <param name="resourceName"></param>
+            <param name="arg0"></param>
+        </member>
+        <member name="M:Microsoft.VisualStudio.CommandTable.Conditionals.ErrorUtilities.VerifyThrowInvalidOperation(System.Boolean,System.String,System.Object,System.Object)">
+            <summary>
+            Overload for two string format arguments.
+            </summary>
+            <owner>SumedhK</owner>
+            <param name="condition"></param>
+            <param name="resourceName"></param>
+            <param name="arg0"></param>
+            <param name="arg1"></param>
+        </member>
+        <member name="M:Microsoft.VisualStudio.CommandTable.Conditionals.ErrorUtilities.VerifyThrowInvalidOperation(System.Boolean,System.String,System.Object,System.Object,System.Object)">
+            <summary>
+            Overload for three string format arguments.
+            </summary>
+            <owner>SumedhK</owner>
+            <param name="condition"></param>
+            <param name="resourceName"></param>
+            <param name="arg0"></param>
+            <param name="arg1"></param>
+            <param name="arg2"></param>
+        </member>
+        <member name="M:Microsoft.VisualStudio.CommandTable.Conditionals.ErrorUtilities.ThrowArgument(System.Exception,System.String,System.Object[])">
+            <summary>
+            Throws an ArgumentException that can include an inner exception.
+            
+            PERF WARNING: calling a method that takes a variable number of arguments
+            is expensive, because memory is allocated for the array of arguments -- do
+            not call this method repeatedly in performance-critical scenarios
+            </summary>
+            <remarks>
+            This method is thread-safe.
+            </remarks>
+            <owner>RGoel, SumedhK</owner>
+            <param name="innerException">Can be null.</param>
+            <param name="resourceName"></param>
+            <param name="args"></param>
+        </member>
+        <member name="M:Microsoft.VisualStudio.CommandTable.Conditionals.ErrorUtilities.VerifyThrowArgument(System.Boolean,System.String)">
+            <summary>
+            Throws an ArgumentException if the given condition is false.
+            </summary>
+            <remarks>This method is thread-safe.</remarks>
+            <owner>RGoel, SumedhK</owner>
+            <param name="condition"></param>
+            <param name="resourceName"></param>
+        </member>
+        <member name="M:Microsoft.VisualStudio.CommandTable.Conditionals.ErrorUtilities.VerifyThrowArgument(System.Boolean,System.String,System.Object)">
+            <summary>
+            Overload for one string format argument.
+            </summary>
+            <remarks>This method is thread-safe.</remarks>
+            <owner>SumedhK</owner>
+            <param name="condition"></param>
+            <param name="resourceName"></param>
+            <param name="arg0"></param>
+        </member>
+        <member name="M:Microsoft.VisualStudio.CommandTable.Conditionals.ErrorUtilities.VerifyThrowArgument(System.Boolean,System.String,System.Object,System.Object)">
+            <summary>
+            Overload for two string format arguments.
+            </summary>
+            <remarks>This method is thread-safe.</remarks>
+            <owner>SumedhK</owner>
+            <param name="condition"></param>
+            <param name="resourceName"></param>
+            <param name="arg0"></param>
+            <param name="arg1"></param>
+        </member>
+        <member name="M:Microsoft.VisualStudio.CommandTable.Conditionals.ErrorUtilities.VerifyThrowArgument(System.Boolean,System.Exception,System.String)">
+            <summary>
+            Throws an ArgumentException that includes an inner exception, if
+            the given condition is false.
+            </summary>
+            <remarks>This method is thread-safe.</remarks>
+            <owner>SumedhK</owner>
+            <param name="condition"></param>
+            <param name="innerException">Can be null.</param>
+            <param name="resourceName"></param>
+        </member>
+        <member name="M:Microsoft.VisualStudio.CommandTable.Conditionals.ErrorUtilities.VerifyThrowArgument(System.Boolean,System.Exception,System.String,System.Object)">
+            <summary>
+            Overload for one string format argument.
+            </summary>
+            <remarks>This method is thread-safe.</remarks>
+            <owner>SumedhK</owner>
+            <param name="condition"></param>
+            <param name="innerException"></param>
+            <param name="resourceName"></param>
+            <param name="arg0"></param>
+        </member>
+        <member name="M:Microsoft.VisualStudio.CommandTable.Conditionals.ErrorUtilities.VerifyThrowArgument(System.Boolean,System.Exception,System.String,System.Object,System.Object)">
+            <summary>
+            Overload for two string format arguments.
+            </summary>
+            <remarks>This method is thread-safe.</remarks>
+            <owner>SumedhK</owner>
+            <param name="condition"></param>
+            <param name="innerException"></param>
+            <param name="resourceName"></param>
+            <param name="arg0"></param>
+            <param name="arg1"></param>
+        </member>
+        <member name="M:Microsoft.VisualStudio.CommandTable.Conditionals.ErrorUtilities.VerifyThrowArgumentOutOfRange(System.Boolean,System.String)">
+            <summary>
+            Throws an ArgumentOutOfRangeException using the given parameter name
+            if the condition is false.
+            </summary>
+            <owner>SumedhK</owner>
+            <param name="condition"></param>
+            <param name="parameterName"></param>
+        </member>
+        <member name="M:Microsoft.VisualStudio.CommandTable.Conditionals.ErrorUtilities.VerifyThrowArgumentLength(System.String,System.String)">
+            <summary>
+            Throws an ArgumentException if the given string parameter is null
+            or has zero length.
+            </summary>
+            <owner>SumedhK</owner>
+            <param name="parameter"></param>
+            <param name="parameterName"></param>
+        </member>
+        <member name="M:Microsoft.VisualStudio.CommandTable.Conditionals.ErrorUtilities.VerifyThrowArgumentNull(System.Object,System.String)">
+            <summary>
+            Throws an ArgumentNullException if the given parameter is null.
+            </summary>
+            <remarks>This method is thread-safe.</remarks>
+            <owner>SumedhK</owner>
+            <param name="parameter"></param>
+            <param name="parameterName"></param>
+        </member>
+        <member name="T:Microsoft.VisualStudio.CommandTable.Conditionals.EscapingUtilities">
+            <summary>
+            This class implements static methods to assist with unescaping of %XX codes
+            in the MSBuild file format.
+            </summary>
+            <owner>RGoel</owner>
+        </member>
+        <member name="M:Microsoft.VisualStudio.CommandTable.Conditionals.EscapingUtilities.UnescapeAll(System.String)">
+            <summary>
+            Replaces all instances of %XX in the input string with the character represented
+            by the hexadecimal number XX. 
+            </summary>
+            <param name="escapedString"></param>
+            <returns>unescaped string</returns>
+        </member>
+        <member name="M:Microsoft.VisualStudio.CommandTable.Conditionals.EscapingUtilities.UnescapeAll(System.String,System.Boolean@)">
+            <summary>
+            Replaces all instances of %XX in the input string with the character represented
+            by the hexadecimal number XX. 
+            </summary>
+            <param name="escapedString"></param>
+            <param name="escapingWasNecessary"></param>
+            <returns>unescaped string</returns>
+        </member>
+        <member name="M:Microsoft.VisualStudio.CommandTable.Conditionals.EscapingUtilities.Escape(System.String)">
+            <summary>
+            Adds instances of %XX in the input string where the char char to be escaped appears
+            XX is the hex value of the ASCII code for the char.
+            </summary>
+            <param name="unescapedString"></param>
+            <returns>escaped string</returns>
+        </member>
+        <member name="M:Microsoft.VisualStudio.CommandTable.Conditionals.EscapingUtilities.ContainsReservedCharacters(System.String)">
+            <summary>
+            Before trying to actually escape the string, it can be useful to call this method to determine
+            if escaping is necessary at all.  This can save lots of calls to copy around item metadata
+            that is really the same whether escaped or not.
+            </summary>
+            <param name="unescapedString"></param>
+            <returns></returns>
+            <owner>RGoel</owner>
+        </member>
+        <member name="M:Microsoft.VisualStudio.CommandTable.Conditionals.EscapingUtilities.ContainsEscapedWildcards(System.String)">
+            <summary>
+            Determines whether the string contains the escaped form of '*' or '?'.
+            </summary>
+            <param name="escapedString"></param>
+            <returns></returns>
+            <owner>RGoel</owner>
+        </member>
+        <member name="F:Microsoft.VisualStudio.CommandTable.Conditionals.EscapingUtilities.charsToEscape">
+            <summary>
+            Special characters that need escaping.
+            It's VERY important that the percent character is the FIRST on the list - since it's both a character 
+            we escape and use in escape sequences, we can unintentionally escape other escape sequences if we 
+            don't process it first. Of course we'll have a similar problem if we ever decide to escape hex digits 
+            (that would require rewriting the algorithm) but since it seems unlikely that we ever do, this should
+            be good enough to avoid complicating the algorithm at this point.
+            </summary>
+        </member>
+        <member name="P:Microsoft.VisualStudio.CommandTable.Conditionals.Expander.PrimaryItemsByName">
+            <summary>
+            Accessor for primary items.
+            </summary>
+            <owner>RGoel</owner>
+        </member>
+        <member name="P:Microsoft.VisualStudio.CommandTable.Conditionals.Expander.SecondaryItemsByName">
+            <summary>
+            Accessor for secondary items.  This set of items is used if the item name was 
+            not present in the primary items.
+            </summary>
+            <owner>RGoel</owner>
+        </member>
+        <member name="P:Microsoft.VisualStudio.CommandTable.Conditionals.Expander.ItemMetadata">
+            <summary>
+            Accessor for the item metadata used for metadata expansion (not counting metadata
+            referenced inside a transform).
+            </summary>
+            <owner>RGoel</owner>
+        </member>
+        <member name="M:Microsoft.VisualStudio.CommandTable.Conditionals.Expander.#ctor(System.Collections.Hashtable)">
+            <summary>
+            Constructor to use when properties and items are needed.
+            </summary>
+            <param name="properties"></param>
+            <param name="primaryItemsByName"></param>
+            <owner>RGoel</owner>
+        </member>
+        <member name="M:Microsoft.VisualStudio.CommandTable.Conditionals.Expander.#ctor(System.Collections.Hashtable,System.Collections.Hashtable,System.Collections.Hashtable)">
+            <summary>
+            Most advanced constructor that takes all possible data.
+            </summary>
+            <param name="properties"></param>
+            <param name="primaryItemsByName"></param>
+            <param name="secondaryItemsByName"></param>
+            <param name="itemMetadata"></param>
+            <owner>RGoel</owner>
+        </member>
+        <member name="M:Microsoft.VisualStudio.CommandTable.Conditionals.Expander.ExpandAllIntoString(System.Xml.XmlAttribute)">
+            <summary>
+            An overload of ExpandAllIntoString that conveniently only takes in an XmlAttribute whose
+            value we should expand.
+            </summary>
+            <param name="expressionAttribute"></param>
+            <returns></returns>
+            <owner>RGoel</owner>
+        </member>
+        <member name="M:Microsoft.VisualStudio.CommandTable.Conditionals.Expander.ExpandAllIntoString(System.String,System.Xml.XmlNode)">
+            <summary>
+            Expands embedded item metadata, properties, and embedded item lists (in that order)
+            within an expression.
+            </summary>
+            <param name="expression"></param>
+            <param name="expressionNode">The XML attribute containing the string we're trying to expand here.  Solely
+            for the purposes of providing line/column number information when there's an error.</param>
+            <returns>fully expanded string</returns>
+            <owner>RGoel</owner>
+        </member>
+        <member name="M:Microsoft.VisualStudio.CommandTable.Conditionals.Expander.ExpandAllIntoStringLeaveEscaped(System.Xml.XmlAttribute)">
+            <summary>
+            An overload of ExpandAllIntoString that conveniently only takes in an XmlAttribute whose
+            value we should expand.
+            </summary>
+            <param name="expressionAttribute"></param>
+            <returns></returns>
+            <owner>RGoel</owner>
+        </member>
+        <member name="M:Microsoft.VisualStudio.CommandTable.Conditionals.Expander.ExpandAllIntoStringLeaveEscaped(System.String,System.Xml.XmlNode)">
+            <summary>
+            Expands embedded item metadata, properties, and embedded item lists (in that order)
+            within an expression.
+            </summary>
+            <param name="expression"></param>
+            <param name="expressionNode">The XML attribute containing the string we're trying to expand here.  Solely
+            for the purposes of providing line/column number information when there's an error.</param>
+            <returns>fully expanded string</returns>
+            <owner>RGoel</owner>
+        </member>
+        <member name="M:Microsoft.VisualStudio.CommandTable.Conditionals.Expander.ExpandAllIntoStringList(System.String,System.Xml.XmlNode)">
+            <summary>
+            Expands metadata, properties, and items (in that order) into a list of strings.
+            </summary>
+            <param name="expression"></param>
+            <param name="expressionNode">The XML attribute containing the string we're trying to expand here.  Solely
+            for the purposes of providing line/column number information when there's an error.</param>
+            <returns></returns>
+            <owner>RGoel</owner>
+        </member>
+        <member name="M:Microsoft.VisualStudio.CommandTable.Conditionals.Expander.ExpandAllIntoStringList(System.Xml.XmlAttribute)">
+            <summary>
+            Expands metadata, properties, and items (in that order) into a list of strings.
+            </summary>
+            <param name="expressionAttribute"></param>
+            <returns></returns>
+            <owner>RGoel</owner>
+        </member>
+        <member name="M:Microsoft.VisualStudio.CommandTable.Conditionals.Expander.ExpandAllIntoStringListLeaveEscaped(System.String,System.Xml.XmlNode)">
+            <summary>
+            Expands metadata, properties, and items (in that order) into a list of strings.
+            </summary>
+            <param name="expression"></param>
+            <param name="expressionNode">The XML attribute containing the string we're trying to expand here.  Solely
+            for the purposes of providing line/column number information when there's an error.</param>
+            <returns></returns>
+            <owner>RGoel</owner>
+        </member>
+        <member name="M:Microsoft.VisualStudio.CommandTable.Conditionals.Expander.ExpandAllIntoStringListLeaveEscaped(System.Xml.XmlAttribute)">
+            <summary>
+            Expands metadata, properties, and items (in that order) into a list of strings.
+            </summary>
+            <param name="expressionAttribute"></param>
+            <returns></returns>
+            <owner>RGoel</owner>
+        </member>
+        <member name="M:Microsoft.VisualStudio.CommandTable.Conditionals.Expander.ExpandMetadataLeaveEscaped(System.String)">
+            <summary>
+            Expands all embedded item metadata in the given string, using the bucketed items.
+            
+            This method leaves the expression escaped.  Callers may need to unescape on their own as appropriate.
+            </summary>
+            <remarks>
+            This method is marked internal only for unit-testing purposes. Ideally
+            it should be private.
+            </remarks>
+            <owner>SumedhK</owner>
+            <param name="expression"></param>
+            <returns>the expanded string</returns>
+        </member>
+        <member name="M:Microsoft.VisualStudio.CommandTable.Conditionals.Expander.ExpandSingleMetadata(System.Text.RegularExpressions.Match)">
+            <summary>
+            Expands a single item metadata.
+            </summary>
+            <remarks>This method is a callback for Regex.Replace().</remarks>
+            <owner>SumedhK</owner>
+            <param name="itemMetadataMatch"></param>
+            <returns>the expanded item metadata</returns>
+        </member>
+        <member name="M:Microsoft.VisualStudio.CommandTable.Conditionals.Expander.SplitSemiColonSeparatedList_ForUnitTestsOnly(System.String)">
+            <summary>
+            Internal method to allow unit tests to exercise the SplitSemiColonSeparatedList functionality.
+            This allows us to keep the real method private, which has advantages when trying to grok
+            call graphs.  This way, we can be certain that in the shipping code, nobody outside of
+            this class calls SplitSemiColonSeparatedList directly.
+            </summary>
+            <param name="expression"></param>
+            <returns></returns>
+            <owner>RGoel</owner>
+        </member>
+        <member name="M:Microsoft.VisualStudio.CommandTable.Conditionals.Expander.SplitSemiColonSeparatedList(System.String)">
+            <summary>
+            Splits an expression into fragments at semi-colons, except where the
+            semi-colons are in a macro or separator expression.
+            Fragments are trimmed and empty fragments discarded.
+            </summary>
+            <remarks>
+            These complex cases prevent us from doing a simple split on ';':
+             (1) Macro expression: @(foo-&gt;'xxx;xxx')
+             (2) Separator expression: @(foo, 'xxx;xxx')
+             (3) Combination: @(foo-&gt;'xxx;xxx', 'xxx;xxx')
+             We must not split on semicolons in macro or separator expressions like these.
+            
+            Marked "internal" for unit tests.
+            
+            </remarks>
+            <param name="expression">List expression to split</param>
+            <owner>danmose</owner>
+            <returns>Array of non-empty strings from split list.</returns>
+        </member>
+        <member name="T:Microsoft.VisualStudio.CommandTable.Conditionals.ExpressionTree">
+             
+             Class:   ExpressionTree
+             Owner:   DavidLe
+             
+             Contains the root node of the expression tree and metadata (such as the
+             conditioned properties table, the bag of properties, and the bag of items.
+             
+             This is how you pass around a parsed expression.  This class is returned
+             by a successful parse.
+            
+             After you have one of these, the only method you have to call is Evaluate().
+             It gets passed all the context it needs to evaluate.
+            
+                Parser p = new Parser(CultureInfo);
+                ExpressionTree t = p.Parse(expression, XmlNode);
+            
+             The expression tree can then be evaluated and re-evaluated as needed by
+             calling:
+                t.Evaluate( out value, metadata );
+            
+             The metadata (properties, items, conditioned properties table) can be
+             changed with each invocation.
+             
+        </member>
+        <member name="M:Microsoft.VisualStudio.CommandTable.Conditionals.ExpressionTree.UpdateConditionedPropertiesTable(System.Collections.Hashtable,System.String,System.String)">
+             <summary>
+             Update our table which keeps track of all the properties that are referenced
+             inside of a condition and the string values that they are being tested against.
+             So, for example, if the condition was " '$(Configuration)' == 'Debug' ", we
+             would get passed in leftValue="$(Configuration)" and rightValueExpanded="Debug".
+             This call would add the string "Debug" to the list of possible values for the 
+             "Configuration" property.
+            
+             This method also handles the case when two or more properties are being
+             concatenated together with a vertical bar, as in '
+                 $(Configuration)|$(Platform)' == 'Debug|x86'
+             </summary>
+             <param name="conditionedPropertiesTable"></param>
+             <param name="leftValue"></param>
+             <param name="rightValueExpanded"></param>
+             <owner>rgoel</owner>
+        </member>
+        <member name="T:Microsoft.VisualStudio.CommandTable.Conditionals.FunctionCallExpressionNode">
+             
+             Class:   FunctionCallExpressionNode
+             Owner:   DavidLe
+             
+             Evaluates as:  Boolean (today)
+             Evaluates children as: N/A
+            
+             Contains a function call with an arbitrary number of arguments of
+             different types.  The argument list is stored as an ArrayList.
+            
+             The only function supported today is 'Exists()'
+             
+        </member>
+        <member name="M:Microsoft.VisualStudio.CommandTable.Conditionals.FunctionCallExpressionNode.BoolEvaluate(System.Boolean@)">
+            <summary>
+            Evaluate node as boolean
+            </summary>
+            <param name="value">Result of evaluation</param>
+            <returns>true if successful, otherwise false</returns>
+        </member>
+        <member name="M:Microsoft.VisualStudio.CommandTable.Conditionals.FunctionCallExpressionNode.ExpandArgumentForScalarParameter(System.String,Microsoft.VisualStudio.CommandTable.Conditionals.GenericExpressionNode)">
+            <summary>
+            Expands properties and items in the argument, and verifies that the result is consistent
+            with a scalar parameter type.
+            </summary>
+            <param name="function">Function name for errors</param>
+            <param name="argumentNode">Argument to be expanded</param>
+            <returns>Scalar result</returns>
+            <owner>danmose</owner>
+        </member>
+        <member name="M:Microsoft.VisualStudio.CommandTable.Conditionals.FunctionCallExpressionNode.VerifyArgumentCount(System.Int32)">
+            <summary>
+            Check that the number of function arguments is correct.
+            </summary>
+            <param name="expected"></param>
+        </member>
+        <member name="T:Microsoft.VisualStudio.CommandTable.Conditionals.GenericExpressionNode">
+             
+             Class:   GenericExpressionNode
+             Owner:   DavidLe
+             
+             Contains implementation common to all expression nodes such as the
+             debug output functions and child traversal functions.  Also houses
+             some utility functions that are used by the derived classes (ValidHexNumber(),
+             ValidDecimalNumber(), etc)
+            
+        </member>
+        <member name="M:Microsoft.VisualStudio.CommandTable.Conditionals.GenericExpressionNode.GetExpandedValue">
+            <summary>
+            Value after any item and property expressions are expanded
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.VisualStudio.CommandTable.Conditionals.GenericExpressionNode.GetUnexpandedValue">
+            <summary>
+            Value before any item and property expressions are expanded
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Microsoft.VisualStudio.CommandTable.Conditionals.GreaterThanExpressionNode">
+             
+             Class:   GreaterThanExpressionNode
+             Owner:   DavidLe
+             
+             Evaluates as:  Boolean
+             Evaluates children as: Numeric
+            
+             Does NOT update conditioned properties table.
+            
+             This class evaluates each of it's children as a numeric and returns
+             true if the left child is greater than the right child.
+             
+        </member>
+        <member name="T:Microsoft.VisualStudio.CommandTable.Conditionals.GreaterThanOrEqualExpressionNode">
+             
+             Class:   GreaterThanOrEqualExpressionNode
+             Owner:   DavidLe
+             
+             Evaluates as:  Boolean
+             Evaluates children as: Numeric
+            
+             Does NOT update conditioned properties table.
+            
+             This class evaluates each of it's children as a numeric and returns
+             true if the left child is greater-than-or-equal-to the right child.
+             
+        </member>
+        <member name="T:Microsoft.VisualStudio.CommandTable.Conditionals.InternalErrorException">
+            <summary>
+            This exception is to be thrown whenever an assumption we have made in the code turns out to be false. Thus, if this
+            exception ever gets thrown, it is because of a bug in our own code, not because of something the user or project author
+            did wrong.
+            
+            !~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~
+            WARNING: When this file is shared into multiple assemblies each assembly will view this as a different type.
+                     Don't throw this exception from one assembly and catch it in another.
+            !~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~!~
+                
+            </summary>
+            <owner>RGoel</owner>
+        </member>
+        <member name="M:Microsoft.VisualStudio.CommandTable.Conditionals.InternalErrorException.#ctor">
+            <summary>
+            Default constructor.
+            </summary>
+            <owner>RGoel</owner>
+        </member>
+        <member name="M:Microsoft.VisualStudio.CommandTable.Conditionals.InternalErrorException.#ctor(System.String)">
+            <summary>
+            Creates an instance of this exception using the given message.
+            </summary>
+            <owner>RGoel</owner>
+            <param name="message"></param>
+        </member>
+        <member name="M:Microsoft.VisualStudio.CommandTable.Conditionals.InternalErrorException.#ctor(System.String,System.Boolean)">
+            <summary>
+            Creates an instance of this exception using the given message.
+            </summary>
+            <owner>RGoel</owner>
+            <param name="message"></param>
+            <param name="showAssert">Whether or not to show the assert dialog.</param>
+        </member>
+        <member name="M:Microsoft.VisualStudio.CommandTable.Conditionals.InternalErrorException.#ctor(System.String,System.Exception)">
+            <summary>
+            Creates an instance of this exception using the given message and inner exception.
+            </summary>
+            <owner>RGoel</owner>
+            <param name="message"></param>
+            <param name="innerException"></param>
+        </member>
+        <member name="M:Microsoft.VisualStudio.CommandTable.Conditionals.InternalErrorException.ShowAssertDialog(System.Boolean)">
+            <summary>
+            Show the assert if showAssert==true.
+            </summary>
+            <param name="showAssert"></param>
+        </member>
+        <member name="T:Microsoft.VisualStudio.CommandTable.Conditionals.ItemExpander">
+            <summary>
+            This class is used by the regular expression search/replace function to replace item references of the form
+            @(itemtype-&gt;transform, separator) with the correct string.
+            </summary>
+            <owner>RGoel, SumedhK</owner>
+        </member>
+        <member name="M:Microsoft.VisualStudio.CommandTable.Conditionals.ItemExpander.#ctor">
+            <summary>
+            Private default constructor prevents the class from being instantiated externally with no parameters.
+            </summary>
+            <owner>SumedhK</owner>
+        </member>
+        <member name="M:Microsoft.VisualStudio.CommandTable.Conditionals.ItemExpander.#ctor(System.Xml.XmlNode,System.Collections.Hashtable)">
+            <summary>
+            This constructor takes the item collection used for expanding item vectors.
+            </summary>
+            <owner>SumedhK</owner>
+            <param name="parentNode"></param>
+            <param name="itemGroupsByType"></param>
+        </member>
+        <member name="M:Microsoft.VisualStudio.CommandTable.Conditionals.ItemExpander.#ctor(System.Xml.XmlNode,System.Collections.Hashtable,System.Boolean)">
+            <summary>
+            Constructor, which captures the hashtable of items to use when expanding the item reference.
+            </summary>
+            <owner>RGoel, SumedhK</owner>
+            <param name="parentNode"></param>
+            <param name="itemGroupsByType"></param>
+            <param name="ignoreUnknownItemTypes"></param>
+        </member>
+        <member name="T:Microsoft.VisualStudio.CommandTable.Conditionals.LessThanExpressionNode">
+             
+             Class:   LessThanExpressionNode
+             Owner:   DavidLe
+             
+             Evaluates as:  Boolean
+             Evaluates children as: Numeric
+            
+             Does NOT update conditioned properties table.
+            
+             This class evaluates each of it's children as a numeric and returns
+             true if the left child is less than the right child.
+             
+        </member>
+        <member name="T:Microsoft.VisualStudio.CommandTable.Conditionals.LessThanOrEqualExpressionNode">
+             
+             Class:   LessThanOrEqualExpressionNode
+             Owner:   DavidLe
+             
+             Evaluates as:  Boolean
+             Evaluates children as: Numeric
+            
+             Does NOT update conditioned properties table.
+            
+             This class evaluates each of it's children as a numeric and returns
+             true if the left child is less-than-or-equal-to the right child.
+             
+        </member>
+        <member name="T:Microsoft.VisualStudio.CommandTable.Conditionals.NotEqualExpressionNode">
+             
+             Class:   NotEqualExpressionNode
+             Owner:   DavidLe
+             
+             Evaluates as:  Boolean
+             Evaluates children as: Numeric, boolean, or string
+             
+             Updates conditioned properties table.
+            
+             This node first tries to compare it's children as numerics.  If both
+             support it, numeric equality is tested.  If both don't support numeric
+             values, they are queried if they are both valid boolean values.  If both
+             aren't valid boolean values, then a standard string comparison is done.
+            
+        </member>
+        <member name="T:Microsoft.VisualStudio.CommandTable.Conditionals.NotExpressionNode">
+             
+             Class:   NotExpressionNode
+             Owner:   DavidLe
+             
+             Evaluates as:  Boolean
+             Evaluates children as: Boolean
+             
+             Does NOT update conditioned properties table.
+            
+             This node evaluates it's only child (stored in left child) as a boolean
+             and negates it's value.
+             
+        </member>
+        <member name="F:Microsoft.VisualStudio.CommandTable.Conditionals.NotExpressionNode.expressionTree">
+            <summary>
+            Expression tree to display in error messages
+            </summary>
+        </member>
+        <member name="M:Microsoft.VisualStudio.CommandTable.Conditionals.NotExpressionNode.#ctor(Microsoft.VisualStudio.CommandTable.Conditionals.ExpressionTree)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="expressionTree">Expression tree to display in error messages</param>
+        </member>
+        <member name="M:Microsoft.VisualStudio.CommandTable.Conditionals.NotExpressionNode.GetUnexpandedValue">
+            <summary>
+            Returns unexpanded value with '!' prepended. Useful for error messages.
+            </summary>
+        </member>
+        <member name="M:Microsoft.VisualStudio.CommandTable.Conditionals.NotExpressionNode.GetExpandedValue">
+            <summary>
+            Returns expanded value with '!' prepended. Useful for error messages.
+            </summary>
+        </member>
+        <member name="T:Microsoft.VisualStudio.CommandTable.Conditionals.NumericExpressionNode">
+             
+             Class:   NumericExpressionNode
+             Owner:   DavidLe
+             
+             Evaluates as:  Numeric
+             Evaluates children as: N/A
+            
+             Contains a number.
+            
+        </member>
+        <member name="T:Microsoft.VisualStudio.CommandTable.Conditionals.OrExpressionNode">
+             
+             Class:   OrExpressionNode
+             Owner:   DavidLe
+             
+             Evaluates as:  Boolean
+             Evaluates children as: Boolean
+            
+             Does NOT update conditioned properties table.
+            
+             
+        </member>
+        <member name="F:Microsoft.VisualStudio.CommandTable.Conditionals.OrExpressionNode.expressionTree">
+            <summary>
+            Expression tree to display in error messages
+            </summary>
+        </member>
+        <member name="M:Microsoft.VisualStudio.CommandTable.Conditionals.OrExpressionNode.#ctor(Microsoft.VisualStudio.CommandTable.Conditionals.ExpressionTree)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="expressionTree">Expression tree to display in error messages</param>
+        </member>
+        <member name="T:Microsoft.VisualStudio.CommandTable.Conditionals.ParserOptions">
+             
+             Class:  Parser
+             Owner:  DavidLe
+             
+             This class implements the grammar for complex conditionals.
+            
+             The usage is:
+                Parser p = new Parser(CultureInfo);
+                ExpressionTree t = p.Parse(expression, XmlNode);
+            
+             The expression tree can then be evaluated and re-evaluated as needed.
+            
+        </member>
+        <member name="T:Microsoft.VisualStudio.CommandTable.Conditionals.ResourceUtilities">
+            <summary>
+            This class contains utility methods for dealing with resources.
+            </summary>
+            <owner>SumedhK</owner>
+        </member>
+        <member name="M:Microsoft.VisualStudio.CommandTable.Conditionals.ResourceUtilities.ExtractMessageCode(System.Text.RegularExpressions.Regex,System.String,System.String@)">
+            <summary>
+            Extracts the message code (if any) prefixed to the given string. If a message code pattern is not supplied, the
+            MSBuild message code pattern is used by default. The message code pattern must contain two named capturing groups
+            called "CODE" and "MESSAGE" that identify the message code and the message respectively.
+            </summary>
+            <remarks>This method is thread-safe.</remarks>
+            <owner>SumedhK</owner>
+            <param name="messageCodePattern">The Regex used to find the message code (can be null).</param>
+            <param name="messageWithCode">The string to parse.</param>
+            <param name="code">[out] The message code, or null if there was no code.</param>
+            <returns>The string without its message code prefix.</returns>
+        </member>
+        <member name="M:Microsoft.VisualStudio.CommandTable.Conditionals.ResourceUtilities.GetHelpKeyword(System.String)">
+            <summary>
+            Retrieves the MSBuild F1-help keyword for the given resource string. Help keywords are used to index help topics in
+            host IDEs.
+            </summary>
+            <owner>SumedhK</owner>
+            <param name="resourceName">Resource string to get the MSBuild F1-keyword for.</param>
+            <returns>The MSBuild F1-help keyword string.</returns>
+        </member>
+        <member name="M:Microsoft.VisualStudio.CommandTable.Conditionals.ResourceUtilities.FormatResourceString(System.String@,System.String@,System.String,System.Object[])">
+            <summary>
+            Loads the specified string resource and formats it with the arguments passed in. If the string resource has an MSBuild
+            message code and help keyword associated with it, they too are returned.
+            
+            PERF WARNING: calling a method that takes a variable number of arguments is expensive, because memory is allocated for
+            the array of arguments -- do not call this method repeatedly in performance-critical scenarios
+            </summary>
+            <remarks>This method is thread-safe.</remarks>
+            <owner>SumedhK</owner>
+            <param name="code">[out] The MSBuild message code, or null.</param>
+            <param name="helpKeyword">[out] The MSBuild F1-help keyword for the host IDE, or null.</param>
+            <param name="resourceName">Resource string to load.</param>
+            <param name="args">Optional arguments for formatting the resource string.</param>
+            <returns>The formatted resource string.</returns>
+        </member>
+        <member name="M:Microsoft.VisualStudio.CommandTable.Conditionals.ResourceUtilities.FormatResourceString(System.String,System.Object[])">
+            <summary>
+            Looks up a string in the resources, and formats it with the arguments passed in. If the string resource has an MSBuild
+            message code and help keyword associated with it, they are discarded.
+            
+            PERF WARNING: calling a method that takes a variable number of arguments is expensive, because memory is allocated for
+            the array of arguments -- do not call this method repeatedly in performance-critical scenarios
+            </summary>
+            <remarks>This method is thread-safe.</remarks>
+            <owner>SumedhK</owner>
+            <param name="resourceName">Resource string to load.</param>
+            <param name="args">Optional arguments for formatting the resource string.</param>
+            <returns>The formatted resource string.</returns>
+        </member>
+        <member name="M:Microsoft.VisualStudio.CommandTable.Conditionals.ResourceUtilities.FormatString(System.String,System.Object[])">
+            <summary>
+            Formats the given string using the variable arguments passed in.
+            
+            PERF WARNING: calling a method that takes a variable number of arguments is expensive, because memory is allocated for
+            the array of arguments -- do not call this method repeatedly in performance-critical scenarios
+            </summary>
+            <remarks>This method is thread-safe.</remarks>
+            <owner>SumedhK</owner>
+            <param name="unformatted">The string to format.</param>
+            <param name="args">Optional arguments for formatting the given string.</param>
+            <returns>The formatted string.</returns>
+        </member>
+        <member name="T:Microsoft.VisualStudio.CommandTable.Conditionals.Scanner">
+            <summary>
+            Class:       Scanner
+            This class does the scanning of the input and returns tokens.
+            The usage pattern is:
+               Scanner s = new Scanner(expression, CultureInfo)
+               do {
+                 s.Advance();
+               while (s.IsNext(Token.EndOfInput));
+            
+             After Advance() is called, you can get the current token (s.CurrentToken),
+             check it's type (s.IsNext()), get the string for it (s.NextString()).
+            </summary>
+            <owner>DavidLe</owner>
+        </member>
+        <member name="M:Microsoft.VisualStudio.CommandTable.Conditionals.Scanner.GetErrorResource">
+            <summary>
+            If the lexer errors, it has the best knowledge of the error message to show. For example,
+            'unexpected character' or 'illformed operator'. This method returns the name of the resource
+            string that the parser should display.
+            </summary>
+            <remarks>Intentionally not a property getter to avoid the debugger triggering the Assert dialog</remarks>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.VisualStudio.CommandTable.Conditionals.Scanner.Advance">
+             <summary>
+             Advance
+             returns true on successful advance
+                 and false on an erroneous token
+            
+             Doesn't return error until the bogus input is encountered.
+             Advance() returns true even after EndOfInput is encountered.
+             </summary>
+        </member>
+        <member name="M:Microsoft.VisualStudio.CommandTable.Conditionals.Scanner.ParsePropertyOrItemMetadata">
+            <summary>
+            Parses either the $(propertyname) syntax or the %(metadataname) syntax, 
+            and returns the parsed string beginning with the '$' or '%', and ending with the
+            closing parenthesis.
+            </summary>
+            <returns></returns>
+            <owner>RGoel, DavidLe</owner>
+        </member>
+        <member name="M:Microsoft.VisualStudio.CommandTable.Conditionals.Scanner.ParseProperty">
+            <summary>
+            Parses a string of the form $(propertyname).
+            </summary>
+            <returns></returns>
+            <owner>RGoel, DavidLe</owner>
+        </member>
+        <member name="M:Microsoft.VisualStudio.CommandTable.Conditionals.Scanner.ParseItemMetadata">
+            <summary>
+            Parses a string of the form %(itemmetadataname).
+            </summary>
+            <returns></returns>
+            <owner>RGoel</owner>
+        </member>
+        <member name="T:Microsoft.VisualStudio.CommandTable.Conditionals.StringExpressionNode">
+             
+             Class:   StringExpressionNode
+             Owner:   DavidLe
+             
+             Evaluates as:  Boolean, numeric, string
+             Evaluates children as: N/A
+            
+             Contains a string.  At this point, there's no difference between a string
+             that had quotes around it and a simple string; both end up here.  There
+             may be properties and/or itemlists embedded in this string.
+            
+             GetExpandedValue() returns the expanded, complete string.  GetUnexpandedValue()
+             returns the original string.
+            
+        </member>
+        <member name="M:Microsoft.VisualStudio.CommandTable.Conditionals.StringExpressionNode.GetUnexpandedValue">
+            <summary>
+            Value before any item and property expressions are expanded
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.VisualStudio.CommandTable.Conditionals.StringExpressionNode.GetExpandedValue">
+            <summary>
+            Value after any item and property expressions are expanded
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Microsoft.VisualStudio.CommandTable.Conditionals.Token">
+            <summary>
+            This class represents a token in the Complex Conditionals grammar.  It's
+            really just a bag that contains the type of the token and the string that
+            was parsed into the token.  This isn't very useful for operators, but
+            is useful for strings and such.
+            </summary>
+            <owner>DavidLe</owner>
+        </member>
+        <member name="T:Microsoft.VisualStudio.CommandTable.Conditionals.Token.TokenType">
+            <summary>
+            Valid tokens
+            </summary>
+        </member>
+        <member name="M:Microsoft.VisualStudio.CommandTable.Conditionals.Token.#ctor">
+            <summary>
+            Default constructor.
+            </summary>
+        </member>
+        <member name="M:Microsoft.VisualStudio.CommandTable.Conditionals.Token.#ctor(Microsoft.VisualStudio.CommandTable.Conditionals.Token.TokenType,System.String)">
+            <summary>
+            Constructor takes the token type and the string that
+            represents the token
+            </summary>
+            <param name="type"></param>
+            <param name="tokenString"></param>
+        </member>
+        <member name="M:Microsoft.VisualStudio.CommandTable.Conditionals.Token.IsToken(Microsoft.VisualStudio.CommandTable.Conditionals.Token.TokenType)">
+            <summary>
+            
+            </summary>
+            <param name="type"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Microsoft.VisualStudio.CommandTable.CTMenuResourceExtractor">
+            <summary>
+            Summary description for CTMenuResourceExtractor.
+            </summary>
+        </member>
+        <member name="M:Microsoft.VisualStudio.CommandTable.CTMenuResourceExtractor.AllCommandTablesInAssembly(System.Reflection.Assembly,System.Globalization.CultureInfo)">
+            <summary>
+            Enumerate all byte[] resources in the assembly and return all that are command tables regardless of name
+            </summary>
+            <param name="assemblyForResources"></param>
+            <param name="culture"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.VisualStudio.CommandTable.CTMenuResourceExtractor.ExtractCommandTableFromResources(System.Resources.ResourceManager,System.String,System.Globalization.CultureInfo)">
+            <summary>
+            This method requires a specific resource name to return a specific command table.
+            </summary>
+            <param name="resMgr"></param>
+            <param name="resourceName"></param>
+            <param name="culture"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Microsoft.VisualStudio.CommandTable.FileHeader">
+            <summary>
+            Summary description for FileHeader.
+            </summary>
+        </member>
+        <member name="T:Microsoft.VisualStudio.CommandTable.FlagMap">
+            <summary>
+            Summary description for FlagMap.
+            </summary>
+        </member>
+        <member name="M:Microsoft.VisualStudio.CommandTable.FlagMap.Convert(System.String,System.UInt64,System.String@)">
+            <summary>
+            Convert a string of types into a CommadFlag, any remainng unparsed
+            tokens will be returned in 'unknown' including those that don't fit
+            the provided mask.  If the mask is zero all tokens may match.
+            </summary>
+            <param name="flags"></param>
+            <param name="mask"></param>
+            <param name="unknown"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Microsoft.VisualStudio.CommandTable.GroupFlagMap">
+            <summary>
+            Summary description for FlagMap.
+            </summary>
+        </member>
+        <member name="T:Microsoft.VisualStudio.CommandTable.GuidTable">
+            <summary>
+            Summary description for GUIDTable.
+            </summary>
+        </member>
+        <member name="T:Microsoft.VisualStudio.CommandTable.ICommandItemObserver">
+            <summary>
+            Summary description for ICommandItemChanged.
+            </summary>
+        </member>
+        <member name="T:Microsoft.VisualStudio.CommandTable.IMessageProcessor">
+            <summary>
+            Summary description for IMessageProcessor.
+            </summary>
+        </member>
+        <member name="T:Microsoft.VisualStudio.CommandTable.Item">
+            <summary>
+            Summary description for Item.
+            </summary>
+            
+        </member>
+        <member name="M:Microsoft.VisualStudio.CommandTable.Item.Read(Microsoft.VisualStudio.CommandTable.TextReadVSCTCStream,System.Xml.XmlElement)">
+            <summary>
+            Read every item even if the condition evaluates to false.  enabled will be set
+            to false and cause the write of the binary format to exclude it
+            </summary>
+            <param name="s"></param>
+            <param name="itemNode"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.VisualStudio.CommandTable.Item.Translate(Microsoft.VisualStudio.CommandTable.CommandTable,Microsoft.VisualStudio.CommandTable.CommandTable)">
+            <summary>
+            Translate the gid's, and add symbols for the translated item into the new command table
+            </summary>
+            <param name="ctFrom"></param>
+            <param name="ctTo"></param>
+        </member>
+        <member name="T:Microsoft.VisualStudio.CommandTable.ItemList">
+            <summary>
+            Summary description for ItemList.
+            </summary>
+        </member>
+        <member name="M:Microsoft.VisualStudio.CommandTable.ItemList.Write(Microsoft.VisualStudio.CommandTable.BinaryWriteCTCStream)">
+            <summary>
+            When writing to the binary format, only those items that are marked enabled=true will be
+            written.
+            </summary>
+            <param name="s"></param>
+        </member>
+        <member name="T:Microsoft.VisualStudio.CommandTable.BitmapItemList">
+            <summary>
+            Summary description for BitmapList.
+            </summary>
+        </member>
+        <member name="T:Microsoft.VisualStudio.CommandTable.ButtonList">
+            <summary>
+            Summary description for ButtonList.
+            </summary>
+        </member>
+        <member name="T:Microsoft.VisualStudio.CommandTable.ComboList">
+            <summary>
+            Summary description for ComboList.
+            </summary>
+        </member>
+        <member name="T:Microsoft.VisualStudio.CommandTable.GroupList">
+            <summary>
+            Summary description for GroupList.
+            </summary>
+        </member>
+        <member name="T:Microsoft.VisualStudio.CommandTable.IndexList">
+            <summary>
+            Summary description for IndexList.
+            </summary>
+        </member>
+        <member name="T:Microsoft.VisualStudio.CommandTable.KeyBindingList">
+            <summary>
+            Summary description for KeyBindingList.
+            </summary>
+        </member>
+        <member name="T:Microsoft.VisualStudio.CommandTable.MenuList">
+            <summary>
+            Summary description for MenuList.
+            </summary>
+        </member>
+        <member name="T:Microsoft.VisualStudio.CommandTable.PlacementList">
+            <summary>
+            Summary description for PlacementList.
+            </summary>
+        </member>
+        <member name="T:Microsoft.VisualStudio.CommandTable.UsedCommandList">
+            <summary>
+            Summary description for UsedCommandList.
+            </summary>
+        </member>
+        <member name="T:Microsoft.VisualStudio.CommandTable.VisibilityList">
+            <summary>
+            Summary description for VisibilityList.
+            </summary>
+        </member>
+        <member name="T:Microsoft.VisualStudio.CommandTable.BSTRIP">
+            <summary>
+            Summary description for BitmapItem.
+            </summary>
+        </member>
+        <member name="M:Microsoft.VisualStudio.CommandTable.BitmapItem.Translate(Microsoft.VisualStudio.CommandTable.CommandTable,Microsoft.VisualStudio.CommandTable.CommandTable)">
+            <summary>
+            Use this only after a clone operation when this item is being moved from one command table to another.
+            </summary>
+            <param name="ctFrom"></param>
+            <param name="ctTo"></param>
+        </member>
+        <member name="T:Microsoft.VisualStudio.CommandTable.CommandButton">
+            <summary>
+            Summary description for CommandButton.
+            </summary>
+            
+        </member>
+        <member name="M:Microsoft.VisualStudio.CommandTable.CommandButton.Translate(Microsoft.VisualStudio.CommandTable.CommandTable,Microsoft.VisualStudio.CommandTable.CommandTable)">
+            <summary>
+            Use this only after a clone operation when this item is being moved from one command table to another.
+            </summary>
+            <param name="ctFrom"></param>
+            <param name="ctTo"></param>
+        </member>
+        <member name="T:Microsoft.VisualStudio.CommandTable.CommandCombo">
+            <summary>
+            Summary description for CommandCombo.
+            </summary>
+        </member>
+        <member name="M:Microsoft.VisualStudio.CommandTable.CommandCombo.Translate(Microsoft.VisualStudio.CommandTable.CommandTable,Microsoft.VisualStudio.CommandTable.CommandTable)">
+            <summary>
+            Use this only after a clone operation when this item is being moved from one command table to another.
+            </summary>
+            <param name="ctFrom"></param>
+            <param name="ctTo"></param>
+        </member>
+        <member name="T:Microsoft.VisualStudio.CommandTable.CommandGroup">
+            <summary>
+            Summary description for CommandGroup.
+            </summary>
+        </member>
+        <member name="T:Microsoft.VisualStudio.CommandTable.CommandKeyBinding">
+            <summary>
+            Summary description for KeyBinding.
+            </summary>
+        </member>
+        <member name="T:Microsoft.VisualStudio.CommandTable.CommandKeyBinding.CompareKeystrokes">
+            <summary>
+            This object allows keybinding objects to be sorted by their keystrokes
+            </summary>
+        </member>
+        <member name="M:Microsoft.VisualStudio.CommandTable.CommandKeyBinding.CompareTo(System.Object)">
+            <summary>
+            The key bindings are sorted by emulation, editor, item gid, item id, then original order
+            the keybinding inherits from Item but it reinterprets gidParent and does not use idParent
+            gidParent is the gid of the editor it is active in.  Redundant bindings are required
+            for multiple editors to use the same keys.
+            </summary>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.VisualStudio.CommandTable.CommandKeyBinding.Translate(Microsoft.VisualStudio.CommandTable.CommandTable,Microsoft.VisualStudio.CommandTable.CommandTable)">
+            <summary>
+            Use this only after a clone operation when this item is being moved from one command table to another.
+            </summary>
+            <param name="ctFrom"></param>
+            <param name="ctTo"></param>
+        </member>
+        <member name="T:Microsoft.VisualStudio.CommandTable.CommandMenu">
+            <summary>
+            Summary description for CommandMenu.
+            </summary>
+        </member>
+        <member name="T:Microsoft.VisualStudio.CommandTable.CommandPlacement">
+            <summary>
+            Summary description for Placement.
+            </summary>
+        </member>
+        <member name="T:Microsoft.VisualStudio.CommandTable.IndexItem">
+            <summary>
+            Summary description for IndexItem.
+            </summary>
+        </member>
+        <member name="T:Microsoft.VisualStudio.CommandTable.UsedCommandItem">
+            <summary>
+            Summary description for UsedCommand.
+            </summary>
+        </member>
+        <member name="T:Microsoft.VisualStudio.CommandTable.VisibilityItem">
+            <summary>
+            Summary description for Visibility.
+            </summary>
+        </member>
+        <member name="M:Microsoft.VisualStudio.CommandTable.VisibilityItem.Translate(Microsoft.VisualStudio.CommandTable.CommandTable,Microsoft.VisualStudio.CommandTable.CommandTable)">
+            <summary>
+            Use this only after a clone operation when this item is being moved from one command table to another.
+            </summary>
+            <param name="ctFrom"></param>
+            <param name="ctTo"></param>
+        </member>
+        <member name="T:Microsoft.VisualStudio.CommandTable.SymbolicNameTable">
+            <summary>
+            Summary description for SymbolicName.
+            </summary>
+        </member>
+        <member name="T:Microsoft.VisualStudio.CommandTable.SymbolicNameTableList">
+            <summary>
+            Summary description for SymbolicNameTableList.
+            </summary>
+        </member>
+        <member name="M:Microsoft.VisualStudio.CommandTable.SymbolicNameTableList.CompileSymbols(System.String,System.String,System.String,System.Collections.Specialized.StringCollection,System.Collections.Specialized.StringCollection)">
+            <summary>
+            process the input file, a .ctc text file, into a .symbols file
+            then import the .symbols file
+            </summary>
+            <param name="fileNameIn"></param>
+            <param name="path"></param>
+        </member>
+        <member name="M:Microsoft.VisualStudio.CommandTable.SymbolicNameTableList.ImportSymbolsXML(Microsoft.VisualStudio.CommandTable.TextReadVSCTCStream)">
+            <summary>
+            Import symbols from a text file (*.symbols)
+            The format being guid:id="guid:id"
+            The first pair being an actual text formatted guid and id in its context, the second pair being the symbols
+            </summary>
+            <param name="fileName"></param>
+        </member>
+        <member name="M:Microsoft.VisualStudio.CommandTable.SymbolicNameTableList.ImportSymbols(System.String,System.Collections.Specialized.StringCollection,Microsoft.VisualStudio.CommandTable.IMessageProcessor)">
+            <summary>
+            Import symbols from a text file (*.symbols)
+            The format being guid:id="guid:id"
+            The first pair being an actual text formatted guid and id in its context, the second pair being the symbols
+            </summary>
+            <param name="fileName"></param>
+        </member>
+        <member name="T:Microsoft.VisualStudio.CommandTable.SymbolTableCompiler">
+            <summary>
+            Summary description for SymbolTableCompiler.
+            </summary>
+        </member>
+        <member name="M:Microsoft.VisualStudio.CommandTable.SymbolTableCompiler.Compile(System.String,System.String,System.String,System.Collections.Specialized.StringCollection,System.Collections.Specialized.StringCollection)">
+            <summary>
+            process the input file, a .ctc text file, into a .symbols file
+            To accomplish this:
+            1. We navigate the include path collecting all non .ctc #include statements
+            and collecting all guid:id pairs from all statements
+            2. We produce a text file containing in order all of the collected #include statements
+            and produce line items containing the guid:id pairs followed by the pair in quotes
+            3. Run this through the preprocessor to replace the first pair with numbers
+            4. Write the result to a .symbols file using the fileNameIn
+            </summary>
+            <param name="fileInput"></param>
+            <param name="path"></param>
+        </member>
+        <member name="T:Microsoft.VisualStudio.CommandTable.TextCTCStreamBase">
+            <summary>
+            Summary description for TextCTCStreamBase.
+            </summary>
+        </member>
+        <member name="T:Microsoft.VisualStudio.CommandTable.TextReadCTCStream">
+            <summary>
+            Summary description for TextReadCTCStream.
+            </summary>
+        </member>
+        <member name="T:Microsoft.VisualStudio.CommandTable.TextReadVSCTCStream">
+            <summary>
+            Summary description for TextReadVSCTCStream.
+            </summary>
+        </member>
+        <member name="T:Microsoft.VisualStudio.CommandTable.TextWriteCTCStream">
+            <summary>
+            Summary description for TextWriteCTCStream.
+            </summary>
+        </member>
+        <member name="M:Microsoft.VisualStudio.CommandTable.TextWriteCTCStream.#ctor(System.String,Microsoft.VisualStudio.CommandTable.ItemFormatter)">
+            <summary>
+            Create a stream object to generate the text format of a ctc file.
+            The files created will be "pkgidcmd.h" and "pkg.ctc" in that folder specified.
+            </summary>
+            <param name="folderName"></param>
+        </member>
+        <member name="T:Microsoft.VisualStudio.CommandTable.TextWriteVSCTCStream">
+            <summary>
+            Dump the ctc into an xml document
+            </summary>
+        </member>
+        <member name="M:Microsoft.VisualStudio.CommandTable.TextWriteVSCTCStream.#ctor(System.String,Microsoft.VisualStudio.CommandTable.ItemFormatter)">
+            <summary>
+            Create a stream object to generate the text format of a ctc file.
+            The files created will be "pkgidcmd.h" and "pkg.ctc" in that folder specified.
+            </summary>
+            <param name="folderName"></param>
+        </member>
+        <member name="T:Microsoft.VisualStudio.CommandTable.TypeMap">
+            <summary>
+            Summary description for TypeMap.
+            </summary>
+        </member>
+        <member name="M:Microsoft.VisualStudio.CommandTable.TypeMap.Convert(System.String,System.UInt32,System.String@)">
+            <summary>
+            Convert a string of types into a CommadType, any remaining unparsed
+            tokens will be returned in 'unknown' including those that don't fit
+            the provided mask.  If the mask is zero all tokens may match.
+            </summary>
+            <param name="types"></param>
+            <param name="mask"></param>
+            <param name="unknown"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Microsoft.VisualStudio.CommandTable.UnsafeNativeMethods">
+            <summary>
+            Summary description for UnsafeNativeMethods.
+            </summary>
+        </member>
+        <member name="T:Microsoft.VisualStudio.CommandTable.VSKBinding">
+            <summary>
+            Summary description for VSKBinding.
+            </summary>
+        </member>
+        <member name="T:Microsoft.VisualStudio.CommandTable.VSKBindingList">
+            <summary>
+            Summary description for VSKBindingTable.
+            </summary>
+        </member>
+        <member name="T:Microsoft.VisualStudio.CommandTable.VSKCommandTable">
+            <summary>
+            Summary description for VSKCommandTable.
+            </summary>
+        </member>
+        <member name="T:Microsoft.VisualStudio.CommandTable.VSKGuidTable">
+            <summary>
+            Summary description for VSKGuidTable.
+            </summary>
+        </member>
+        <member name="T:System.Diagnostics.CodeAnalysis.AllowNullAttribute">
+            <summary>
+            Specifies that null is allowed as an input even if the corresponding type disallows it.
+            </summary>
+        </member>
+        <member name="T:System.Diagnostics.CodeAnalysis.ConstantExpectedAttribute">
+            <summary>
+            Indicates that the specified method parameter expects a constant.
+            </summary>
+            <remarks>
+            This can be used to inform tooling that a constant should be used as an argument for the annotated parameter.
+            </remarks>
+        </member>
+        <member name="P:System.Diagnostics.CodeAnalysis.ConstantExpectedAttribute.Min">
+            <summary>
+            Indicates the minimum bound of the expected constant, inclusive.
+            </summary>
+        </member>
+        <member name="P:System.Diagnostics.CodeAnalysis.ConstantExpectedAttribute.Max">
+            <summary>
+            Indicates the maximum bound of the expected constant, inclusive.
+            </summary>
+        </member>
+        <member name="T:System.Diagnostics.CodeAnalysis.DisallowNullAttribute">
+            <summary>
+            Specifies that null is disallowed as an input even if the corresponding type allows it.
+            </summary>
+        </member>
+        <member name="T:System.Diagnostics.CodeAnalysis.DoesNotReturnAttribute">
+            <summary>
+            Applied to a method that will never return under any circumstance.
+            </summary>
+        </member>
+        <member name="T:System.Diagnostics.CodeAnalysis.DoesNotReturnIfAttribute">
+            <summary>
+            Specifies that the method will not return if the associated Boolean parameter is passed the specified value.
+            </summary>
+        </member>
+        <member name="M:System.Diagnostics.CodeAnalysis.DoesNotReturnIfAttribute.#ctor(System.Boolean)">
+            <summary>
+            Initializes the attribute with the specified parameter value.
+            </summary>
+            <param name="parameterValue">
+            The condition parameter value. Code after the method will be considered unreachable
+            by diagnostics if the argument to the associated parameter matches this value.
+            </param>
+        </member>
+        <member name="P:System.Diagnostics.CodeAnalysis.DoesNotReturnIfAttribute.ParameterValue">
+            <summary>
+            Gets the condition parameter value.
+            </summary>
+        </member>
+        <member name="T:System.Diagnostics.CodeAnalysis.ExperimentalAttribute">
+            <summary>
+            Indicates that an API is experimental and it may change in the future.
+            </summary>
+            <remarks>
+            This attribute allows call sites to be flagged with a diagnostic that indicates that an experimental
+            feature is used. Authors can use this attribute to ship preview features in their assemblies.
+            </remarks>
+        </member>
+        <member name="M:System.Diagnostics.CodeAnalysis.ExperimentalAttribute.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:System.Diagnostics.CodeAnalysis.ExperimentalAttribute" /> class,
+            specifying the ID that the compiler will use when reporting a use of the API the attribute applies to.
+            </summary>
+            <param name="diagnosticId">The ID that the compiler will use when reporting a use of the API the attribute applies to.</param>
+        </member>
+        <member name="P:System.Diagnostics.CodeAnalysis.ExperimentalAttribute.DiagnosticId">
+            <summary>
+            Gets the ID that the compiler will use when reporting a use of the API the attribute applies to.
+            </summary>
+            <value>The unique diagnostic ID.</value>
+            <remarks>
+            The diagnostic ID is shown in build output for warnings and errors.
+            <para>This property represents the unique ID that can be used to suppress the warnings or errors, if needed.</para>
+            </remarks>
+        </member>
+        <member name="P:System.Diagnostics.CodeAnalysis.ExperimentalAttribute.UrlFormat">
+            <summary>
+            Gets or sets the URL for corresponding documentation.
+            The API accepts a format string instead of an actual URL, creating a generic URL that includes the diagnostic ID.
+            </summary>
+            <value>The format string that represents a URL to corresponding documentation.</value>
+            <remarks>An example format string is <c>https://contoso.com/obsoletion-warnings/{0}</c>.</remarks>
+        </member>
+        <member name="T:System.Diagnostics.CodeAnalysis.MaybeNullAttribute">
+            <summary>
+            Specifies that an output may be null even if the corresponding type disallows it.
+            </summary>
+        </member>
+        <member name="T:System.Diagnostics.CodeAnalysis.MaybeNullWhenAttribute">
+            <summary>
+            Specifies that when a method returns <see cref="P:System.Diagnostics.CodeAnalysis.MaybeNullWhenAttribute.ReturnValue" />, the parameter may be null even if the corresponding type disallows it.
+            </summary>
+        </member>
+        <member name="M:System.Diagnostics.CodeAnalysis.MaybeNullWhenAttribute.#ctor(System.Boolean)">
+            <summary>
+            Initializes the attribute with the specified return value condition.
+            </summary>
+            <param name="returnValue">The return value condition. If the method returns this value, the associated parameter may be null.</param>
+        </member>
+        <member name="P:System.Diagnostics.CodeAnalysis.MaybeNullWhenAttribute.ReturnValue">
+            <summary>
+            Gets the return value condition.
+            </summary>
+        </member>
+        <member name="T:System.Diagnostics.CodeAnalysis.MemberNotNullAttribute">
+            <summary>
+            Specifies that the method or property will ensure that the listed field and property members have not-null values.
+            </summary>
+        </member>
+        <member name="M:System.Diagnostics.CodeAnalysis.MemberNotNullAttribute.#ctor(System.String)">
+            <summary>
+            Initializes the attribute with a field or property member.
+            </summary>
+            <param name="member">The field or property member that is promised to be not-null.</param>
+        </member>
+        <member name="M:System.Diagnostics.CodeAnalysis.MemberNotNullAttribute.#ctor(System.String[])">
+            <summary>
+            Initializes the attribute with the list of field and property members.
+            </summary>
+            <param name="members">The list of field and property members that are promised to be not-null.</param>
+        </member>
+        <member name="P:System.Diagnostics.CodeAnalysis.MemberNotNullAttribute.Members">
+            <summary>
+            Gets field or property member names.
+            </summary>
+        </member>
+        <member name="T:System.Diagnostics.CodeAnalysis.MemberNotNullWhenAttribute">
+            <summary>
+            Specifies that the method or property will ensure that the listed field and property
+            members have not-null values when returning with the specified return value condition.
+            </summary>
+        </member>
+        <member name="M:System.Diagnostics.CodeAnalysis.MemberNotNullWhenAttribute.#ctor(System.Boolean,System.String)">
+            <summary>
+            Initializes the attribute with the specified return value condition and a field or property member.
+            </summary>
+            <param name="returnValue">The return value condition. If the method returns this value, the associated parameter will not be null.</param>
+            <param name="member">The field or property member that is promised to be not-null.</param>
+        </member>
+        <member name="M:System.Diagnostics.CodeAnalysis.MemberNotNullWhenAttribute.#ctor(System.Boolean,System.String[])">
+            <summary>
+            Initializes the attribute with the specified return value condition and list of field and property members.
+            </summary>
+            <param name="returnValue">The return value condition. If the method returns this value, the associated parameter will not be null.</param>
+            <param name="members">The list of field and property members that are promised to be not-null.</param>
+        </member>
+        <member name="P:System.Diagnostics.CodeAnalysis.MemberNotNullWhenAttribute.ReturnValue">
+            <summary>
+            Gets the return value condition.
+            </summary>
+        </member>
+        <member name="P:System.Diagnostics.CodeAnalysis.MemberNotNullWhenAttribute.Members">
+            <summary>
+            Gets field or property member names.
+            </summary>
+        </member>
+        <member name="T:System.Diagnostics.CodeAnalysis.NotNullAttribute">
+            <summary>
+            Specifies that an output will not be null even if the corresponding type allows it.
+            Specifies that an input argument was not null when the call returns.
+            </summary>
+        </member>
+        <member name="T:System.Diagnostics.CodeAnalysis.NotNullIfNotNullAttribute">
+            <summary>
+            Specifies that the output will be non-null if the named parameter is non-null.
+            </summary>
+        </member>
+        <member name="M:System.Diagnostics.CodeAnalysis.NotNullIfNotNullAttribute.#ctor(System.String)">
+            <summary>
+            Initializes the attribute with the associated parameter name.
+            </summary>
+            <param name="parameterName">The associated parameter name. The output will be non-null if the argument to the parameter specified is non-null.</param>
+        </member>
+        <member name="P:System.Diagnostics.CodeAnalysis.NotNullIfNotNullAttribute.ParameterName">
+            <summary>
+            Gets the associated parameter name.
+            </summary>
+        </member>
+        <member name="T:System.Diagnostics.CodeAnalysis.NotNullWhenAttribute">
+            <summary>
+            Specifies that when a method returns <see cref="P:System.Diagnostics.CodeAnalysis.NotNullWhenAttribute.ReturnValue" />, the parameter will not be null even if the corresponding type allows it.
+            </summary>
+        </member>
+        <member name="M:System.Diagnostics.CodeAnalysis.NotNullWhenAttribute.#ctor(System.Boolean)">
+            <summary>
+            Initializes the attribute with the specified return value condition.
+            </summary>
+            <param name="returnValue">The return value condition. If the method returns this value, the associated parameter will not be null.</param>
+        </member>
+        <member name="P:System.Diagnostics.CodeAnalysis.NotNullWhenAttribute.ReturnValue">
+            <summary>Gets the return value condition.</summary>
+        </member>
+        <member name="T:System.Diagnostics.CodeAnalysis.SetsRequiredMembersAttribute">
+            <summary>
+            Specifies that this constructor sets all required members for the current type,
+            and callers do not need to set any required members themselves.
+            </summary>
+        </member>
+        <member name="T:System.Diagnostics.CodeAnalysis.StringSyntaxAttribute">
+            <summary>
+            Specifies the syntax used in a string.
+            </summary>
+        </member>
+        <member name="M:System.Diagnostics.CodeAnalysis.StringSyntaxAttribute.#ctor(System.String)">
+            <summary>
+            Initializes the <see cref="T:System.Diagnostics.CodeAnalysis.StringSyntaxAttribute" /> with the identifier of the syntax used.
+            </summary>
+            <param name="syntax">The syntax identifier.</param>
+        </member>
+        <member name="M:System.Diagnostics.CodeAnalysis.StringSyntaxAttribute.#ctor(System.String,System.Object[])">
+            <summary>Initializes the <see cref="T:System.Diagnostics.CodeAnalysis.StringSyntaxAttribute" /> with the identifier of the syntax used.</summary>
+            <param name="syntax">The syntax identifier.</param>
+            <param name="arguments">Optional arguments associated with the specific syntax employed.</param>
+        </member>
+        <member name="P:System.Diagnostics.CodeAnalysis.StringSyntaxAttribute.Syntax">
+            <summary>Gets the identifier of the syntax used.</summary>
+        </member>
+        <member name="P:System.Diagnostics.CodeAnalysis.StringSyntaxAttribute.Arguments">
+            <summary>Optional arguments associated with the specific syntax employed.</summary>
+        </member>
+        <member name="F:System.Diagnostics.CodeAnalysis.StringSyntaxAttribute.CompositeFormat">
+            <summary>The syntax identifier for strings containing composite formats for string formatting.</summary>
+        </member>
+        <member name="F:System.Diagnostics.CodeAnalysis.StringSyntaxAttribute.DateOnlyFormat">
+            <summary>The syntax identifier for strings containing date format specifiers.</summary>
+        </member>
+        <member name="F:System.Diagnostics.CodeAnalysis.StringSyntaxAttribute.DateTimeFormat">
+            <summary>The syntax identifier for strings containing date and time format specifiers.</summary>
+        </member>
+        <member name="F:System.Diagnostics.CodeAnalysis.StringSyntaxAttribute.EnumFormat">
+            <summary>The syntax identifier for strings containing <see cref="T:System.Enum" /> format specifiers.</summary>
+        </member>
+        <member name="F:System.Diagnostics.CodeAnalysis.StringSyntaxAttribute.GuidFormat">
+            <summary>The syntax identifier for strings containing <see cref="T:System.Guid" /> format specifiers.</summary>
+        </member>
+        <member name="F:System.Diagnostics.CodeAnalysis.StringSyntaxAttribute.Json">
+            <summary>The syntax identifier for strings containing JavaScript Object Notation (JSON).</summary>
+        </member>
+        <member name="F:System.Diagnostics.CodeAnalysis.StringSyntaxAttribute.NumericFormat">
+            <summary>The syntax identifier for strings containing numeric format specifiers.</summary>
+        </member>
+        <member name="F:System.Diagnostics.CodeAnalysis.StringSyntaxAttribute.Regex">
+            <summary>The syntax identifier for strings containing regular expressions.</summary>
+        </member>
+        <member name="F:System.Diagnostics.CodeAnalysis.StringSyntaxAttribute.TimeOnlyFormat">
+            <summary>The syntax identifier for strings containing time format specifiers.</summary>
+        </member>
+        <member name="F:System.Diagnostics.CodeAnalysis.StringSyntaxAttribute.TimeSpanFormat">
+            <summary>The syntax identifier for strings containing <see cref="T:System.TimeSpan" /> format specifiers.</summary>
+        </member>
+        <member name="F:System.Diagnostics.CodeAnalysis.StringSyntaxAttribute.Uri">
+            <summary>The syntax identifier for strings containing URIs.</summary>
+        </member>
+        <member name="F:System.Diagnostics.CodeAnalysis.StringSyntaxAttribute.Xml">
+            <summary>The syntax identifier for strings containing XML.</summary>
+        </member>
+        <member name="T:System.Diagnostics.CodeAnalysis.UnscopedRefAttribute">
+            <summary>
+            Used to indicate a byref escapes and is not scoped.
+            </summary>
+            <remarks>
+            <para>
+            There are several cases where the C# compiler treats a <see langword="ref" /> as implicitly
+            <see langword="scoped" /> - where the compiler does not allow the <see langword="ref" /> to escape the method.
+            </para>
+            <para>
+            For example:
+            <list type="number">
+                <item><see langword="this" /> for <see langword="struct" /> instance methods.</item>
+                <item><see langword="ref" /> parameters that refer to <see langword="ref" /> <see langword="struct" /> types.</item>
+                <item><see langword="out" /> parameters.</item>
+            </list>
+            </para>
+            <para>
+            This attribute is used in those instances where the <see langword="ref" /> should be allowed to escape.
+            </para>
+            <para>
+            Applying this attribute, in any form, has impact on consumers of the applicable API. It is necessary for
+            API authors to understand the lifetime implications of applying this attribute and how it may impact their users.
+            </para>
+            </remarks>
+        </member>
+        <member name="T:System.Index">
+            <summary>Represent a type can be used to index a collection either from the start or the end.</summary>
+            <remarks>
+            Index is used by the C# compiler to support the new index syntax
+            <code>
+            int[] someArray = new int[5] { 1, 2, 3, 4, 5 } ;
+            int lastElement = someArray[^1]; // lastElement = 5
+            </code>
+            </remarks>
+        </member>
+        <member name="M:System.Index.#ctor(System.Int32,System.Boolean)">
+            <summary>Construct an Index using a value and indicating if the index is from the start or from the end.</summary>
+            <param name="value">The index value. it has to be zero or positive number.</param>
+            <param name="fromEnd">Indicating if the index is from the start or from the end.</param>
+            <remarks>
+            If the Index constructed from the end, index value 1 means pointing at the last element and index value 0 means pointing at beyond last element.
+            </remarks>
+        </member>
+        <member name="P:System.Index.Start">
+            <summary>Create an Index pointing at first element.</summary>
+        </member>
+        <member name="P:System.Index.End">
+            <summary>Create an Index pointing at beyond last element.</summary>
+        </member>
+        <member name="M:System.Index.FromStart(System.Int32)">
+            <summary>Create an Index from the start at the position indicated by the value.</summary>
+            <param name="value">The index value from the start.</param>
+        </member>
+        <member name="M:System.Index.FromEnd(System.Int32)">
+            <summary>Create an Index from the end at the position indicated by the value.</summary>
+            <param name="value">The index value from the end.</param>
+        </member>
+        <member name="P:System.Index.Value">
+            <summary>Returns the index value.</summary>
+        </member>
+        <member name="P:System.Index.IsFromEnd">
+            <summary>Indicates whether the index is from the start or the end.</summary>
+        </member>
+        <member name="M:System.Index.GetOffset(System.Int32)">
+            <summary>Calculate the offset from the start using the giving collection length.</summary>
+            <param name="length">The length of the collection that the Index will be used with. length has to be a positive value</param>
+            <remarks>
+            For performance reason, we don't validate the input length parameter and the returned offset value against negative values.
+            we don't validate either the returned offset is greater than the input length.
+            It is expected Index will be used with collections which always have non negative length/count. If the returned offset is negative and
+            then used to index a collection will get out of range exception which will be same affect as the validation.
+            </remarks>
+        </member>
+        <member name="M:System.Index.Equals(System.Object)">
+            <summary>Indicates whether the current Index object is equal to another object of the same type.</summary>
+            <param name="value">An object to compare with this object</param>
+        </member>
+        <member name="M:System.Index.Equals(System.Index)">
+            <summary>Indicates whether the current Index object is equal to another Index object.</summary>
+            <param name="other">An object to compare with this object</param>
+        </member>
+        <member name="M:System.Index.GetHashCode">
+            <summary>Returns the hash code for this instance.</summary>
+        </member>
+        <member name="M:System.Index.op_Implicit(System.Int32)~System.Index">
+            <summary>Converts integer number to an Index.</summary>
+        </member>
+        <member name="M:System.Index.ToString">
+            <summary>Converts the value of the current Index object to its equivalent string representation.</summary>
+        </member>
+        <member name="T:System.Range">
+            <summary>Represent a range has start and end indexes.</summary>
+            <remarks>
+            Range is used by the C# compiler to support the range syntax.
+            <code>
+            int[] someArray = new int[5] { 1, 2, 3, 4, 5 };
+            int[] subArray1 = someArray[0..2]; // { 1, 2 }
+            int[] subArray2 = someArray[1..^0]; // { 2, 3, 4, 5 }
+            </code>
+            </remarks>
+        </member>
+        <member name="P:System.Range.Start">
+            <summary>Represent the inclusive start index of the Range.</summary>
+        </member>
+        <member name="P:System.Range.End">
+            <summary>Represent the exclusive end index of the Range.</summary>
+        </member>
+        <member name="M:System.Range.#ctor(System.Index,System.Index)">
+            <summary>Construct a Range object using the start and end indexes.</summary>
+            <param name="start">Represent the inclusive start index of the range.</param>
+            <param name="end">Represent the exclusive end index of the range.</param>
+        </member>
+        <member name="M:System.Range.Equals(System.Object)">
+            <summary>Indicates whether the current Range object is equal to another object of the same type.</summary>
+            <param name="value">An object to compare with this object</param>
+        </member>
+        <member name="M:System.Range.Equals(System.Range)">
+            <summary>Indicates whether the current Range object is equal to another Range object.</summary>
+            <param name="other">An object to compare with this object</param>
+        </member>
+        <member name="M:System.Range.GetHashCode">
+            <summary>Returns the hash code for this instance.</summary>
+        </member>
+        <member name="M:System.Range.ToString">
+            <summary>Converts the value of the current Range object to its equivalent string representation.</summary>
+        </member>
+        <member name="M:System.Range.StartAt(System.Index)">
+            <summary>Create a Range object starting from start index to the end of the collection.</summary>
+        </member>
+        <member name="M:System.Range.EndAt(System.Index)">
+            <summary>Create a Range object starting from first element in the collection to the end Index.</summary>
+        </member>
+        <member name="P:System.Range.All">
+            <summary>Create a Range object starting from first element to the end.</summary>
+        </member>
+        <member name="M:System.Range.GetOffsetAndLength(System.Int32)">
+            <summary>Calculate the start offset and length of range object using a collection length.</summary>
+            <param name="length">The length of the collection that the range will be used with. length has to be a positive value.</param>
+            <remarks>
+            For performance reason, we don't validate the input length parameter against negative values.
+            It is expected Range will be used with collections which always have non negative length/count.
+            We validate the range is inside the length scope though.
+            </remarks>
+        </member>
+        <member name="T:System.Runtime.CompilerServices.AsyncMethodBuilderAttribute">
+            <summary>
+            Indicates the type of the async method builder that should be used by a language compiler to
+            build the attributed async method or to build the attributed type when used as the return type
+            of an async method.
+            </summary>
+        </member>
+        <member name="M:System.Runtime.CompilerServices.AsyncMethodBuilderAttribute.#ctor(System.Type)">
+            <summary>Initializes the <see cref="T:System.Runtime.CompilerServices.AsyncMethodBuilderAttribute" />.</summary>
+            <param name="builderType">The <see cref="T:System.Type" /> of the associated builder.</param>
+        </member>
+        <member name="P:System.Runtime.CompilerServices.AsyncMethodBuilderAttribute.BuilderType">
+            <summary>Gets the <see cref="T:System.Type" /> of the associated builder.</summary>
+        </member>
+        <member name="T:System.Runtime.CompilerServices.CallerArgumentExpressionAttribute">
+            <summary>
+            An attribute that allows parameters to receive the expression of other parameters.
+            </summary>
+        </member>
+        <member name="M:System.Runtime.CompilerServices.CallerArgumentExpressionAttribute.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:System.Runtime.CompilerServices.CallerArgumentExpressionAttribute" /> class.
+            </summary>
+            <param name="parameterName">The condition parameter value.</param>
+        </member>
+        <member name="P:System.Runtime.CompilerServices.CallerArgumentExpressionAttribute.ParameterName">
+            <summary>
+            Gets the parameter name the expression is retrieved from.
+            </summary>
+        </member>
+        <member name="M:System.Runtime.CompilerServices.CollectionBuilderAttribute.#ctor(System.Type,System.String)">
+            <summary>
+            Initialize the attribute to refer to the <paramref name="methodName" /> method on the <paramref name="builderType" /> type.
+            </summary>
+            <param name="builderType">The type of the builder to use to construct the collection.</param>
+            <param name="methodName">The name of the method on the builder to use to construct the collection.</param>
+            <remarks>
+            <paramref name="methodName" /> must refer to a static method that accepts a single parameter of
+            type <see cref="!:ReadOnlySpan&lt;T&gt;" /> and returns an instance of the collection being built containing
+            a copy of the data from that span.  In future releases of .NET, additional patterns may be supported.
+            </remarks>
+        </member>
+        <member name="P:System.Runtime.CompilerServices.CollectionBuilderAttribute.BuilderType">
+            <summary>
+            Gets the type of the builder to use to construct the collection.
+            </summary>
+        </member>
+        <member name="P:System.Runtime.CompilerServices.CollectionBuilderAttribute.MethodName">
+            <summary>
+            Gets the name of the method on the builder to use to construct the collection.
+            </summary>
+            <remarks>
+            This should match the metadata name of the target method.
+            For example, this might be ".ctor" if targeting the type's constructor.
+            </remarks>
+        </member>
+        <member name="T:System.Runtime.CompilerServices.CompilerFeatureRequiredAttribute">
+            <summary>
+            Indicates that compiler support for a particular feature is required for the location where this attribute is applied.
+            </summary>
+        </member>
+        <member name="M:System.Runtime.CompilerServices.CompilerFeatureRequiredAttribute.#ctor(System.String)">
+            <summary>
+            Creates a new instance of the <see cref="T:System.Runtime.CompilerServices.CompilerFeatureRequiredAttribute" /> type.
+            </summary>
+            <param name="featureName">The name of the feature to indicate.</param>
+        </member>
+        <member name="P:System.Runtime.CompilerServices.CompilerFeatureRequiredAttribute.FeatureName">
+            <summary>
+            The name of the compiler feature.
+            </summary>
+        </member>
+        <member name="P:System.Runtime.CompilerServices.CompilerFeatureRequiredAttribute.IsOptional">
+            <summary>
+            If true, the compiler can choose to allow access to the location where this attribute is applied if it does not understand <see cref="P:System.Runtime.CompilerServices.CompilerFeatureRequiredAttribute.FeatureName" />.
+            </summary>
+        </member>
+        <member name="F:System.Runtime.CompilerServices.CompilerFeatureRequiredAttribute.RefStructs">
+            <summary>
+            The <see cref="P:System.Runtime.CompilerServices.CompilerFeatureRequiredAttribute.FeatureName" /> used for the ref structs C# feature.
+            </summary>
+        </member>
+        <member name="F:System.Runtime.CompilerServices.CompilerFeatureRequiredAttribute.RequiredMembers">
+            <summary>
+            The <see cref="P:System.Runtime.CompilerServices.CompilerFeatureRequiredAttribute.FeatureName" /> used for the required members C# feature.
+            </summary>
+        </member>
+        <member name="T:System.Runtime.CompilerServices.InterpolatedStringHandlerArgumentAttribute">
+            <summary>
+            Indicates which arguments to a method involving an interpolated string handler should be passed to that handler.
+            </summary>
+        </member>
+        <member name="M:System.Runtime.CompilerServices.InterpolatedStringHandlerArgumentAttribute.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:System.Runtime.CompilerServices.InterpolatedStringHandlerArgumentAttribute" /> class.
+            </summary>
+            <param name="argument">The name of the argument that should be passed to the handler.</param>
+            <remarks><see langword="null" /> may be used as the name of the receiver in an instance method.</remarks>
+        </member>
+        <member name="M:System.Runtime.CompilerServices.InterpolatedStringHandlerArgumentAttribute.#ctor(System.String[])">
+            <summary>
+            Initializes a new instance of the <see cref="T:System.Runtime.CompilerServices.InterpolatedStringHandlerArgumentAttribute" /> class.
+            </summary>
+            <param name="arguments">The names of the arguments that should be passed to the handler.</param>
+            <remarks><see langword="null" /> may be used as the name of the receiver in an instance method.</remarks>
+        </member>
+        <member name="P:System.Runtime.CompilerServices.InterpolatedStringHandlerArgumentAttribute.Arguments">
+            <summary>
+            Gets the names of the arguments that should be passed to the handler.
+            </summary>
+            <remarks><see langword="null" /> may be used as the name of the receiver in an instance method.</remarks>
+        </member>
+        <member name="T:System.Runtime.CompilerServices.InterpolatedStringHandlerAttribute">
+            <summary>
+            Indicates the attributed type is to be used as an interpolated string handler.
+            </summary>
+        </member>
+        <member name="T:System.Runtime.CompilerServices.IsExternalInit">
+            <summary>
+            Reserved to be used by the compiler for tracking metadata.
+            This class should not be used by developers in source code.
+            </summary>
+        </member>
+        <member name="T:System.Runtime.CompilerServices.ModuleInitializerAttribute">
+             <summary>
+             Used to indicate to the compiler that a method should be called
+             in its containing module's initializer.
+             </summary>
+             <remarks>
+             When one or more valid methods
+             with this attribute are found in a compilation, the compiler will
+             emit a module initializer which calls each of the attributed methods.
+            
+             Certain requirements are imposed on any method targeted with this attribute:
+             - The method must be `static`.
+             - The method must be an ordinary member method, as opposed to a property accessor, constructor, local function, etc.
+             - The method must be parameterless.
+             - The method must return `void`.
+             - The method must not be generic or be contained in a generic type.
+             - The method's effective accessibility must be `internal` or `public`.
+            
+             The specification for module initializers in the .NET runtime can be found here:
+             https://github.com/dotnet/runtime/blob/main/docs/design/specs/Ecma-335-Augments.md#module-initializer
+             </remarks>
+        </member>
+        <member name="T:System.Runtime.CompilerServices.OverloadResolutionPriorityAttribute">
+            <summary>
+            Specifies the priority of a member in overload resolution. When unspecified, the default priority is 0.
+            </summary>
+        </member>
+        <member name="M:System.Runtime.CompilerServices.OverloadResolutionPriorityAttribute.#ctor(System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:System.Runtime.CompilerServices.OverloadResolutionPriorityAttribute" /> class.
+            </summary>
+            <param name="priority">The priority of the attributed member. Higher numbers are prioritized, lower numbers are deprioritized. 0 is the default if no attribute is present.</param>
+        </member>
+        <member name="P:System.Runtime.CompilerServices.OverloadResolutionPriorityAttribute.Priority">
+            <summary>
+            The priority of the member.
+            </summary>
+        </member>
+        <member name="T:System.Runtime.CompilerServices.ParamCollectionAttribute">
+            <summary>
+            Indicates that a method will allow a variable number of arguments in its invocation.
+            </summary>
+        </member>
+        <member name="T:System.Runtime.CompilerServices.RequiredMemberAttribute">
+            <summary>
+            Specifies that a type has required members or that a member is required.
+            </summary>
+        </member>
+        <member name="T:System.Runtime.CompilerServices.RequiresLocationAttribute">
+            <summary>
+            Reserved for use by a compiler for tracking metadata.
+            This attribute should not be used by developers in source code.
+            </summary>
+        </member>
+        <member name="T:System.Runtime.CompilerServices.SkipLocalsInitAttribute">
+            <summary>
+            Used to indicate to the compiler that the <c>.locals init</c> flag should not be set in method headers.
+            </summary>
+        </member>
+        <member name="M:System.Runtime.Versioning.RequiresPreviewFeaturesAttribute.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:System.Runtime.Versioning.RequiresPreviewFeaturesAttribute" /> class.
+            </summary>
+        </member>
+        <member name="M:System.Runtime.Versioning.RequiresPreviewFeaturesAttribute.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:System.Runtime.Versioning.RequiresPreviewFeaturesAttribute" /> class with the specified message.
+            </summary>
+            <param name="message">An optional message associated with this attribute instance.</param>
+        </member>
+        <member name="P:System.Runtime.Versioning.RequiresPreviewFeaturesAttribute.Message">
+            <summary>
+            Returns the optional message associated with this attribute instance.
+            </summary>
+        </member>
+        <member name="P:System.Runtime.Versioning.RequiresPreviewFeaturesAttribute.Url">
+            <summary>
+            Returns the optional URL associated with this attribute instance.
+            </summary>
+        </member>
+    </members>
+<Signature xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315" /><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha256" /><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" /><Transform Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315" /></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256" /><DigestValue>zZDegC/cRx2xw3BuH15l/mnWbcLWyjrtBwtMLd3FSLc=</DigestValue></Reference></SignedInfo><SignatureValue>hR7SQFF/EZ1KRmER4K166cMMoaXhwK728f4dqcOvYcG/uxG6FM5Q3I5d4LMmSV6RQ32LfLFniN4bu4tgqnrDp3N9Rv4LIniK7yhz+LhYOQ9fZ3Y/nZzmpR8DFP/qJCSSZ0qjJ1UKDuTf3s490KRAa7dlx7+VVc7lFxOVs1cTbmaptKqfxckz9ps9yxwtfDnBGNqoplzelKFhId6uo7taKVpBbYZlzASG57pK2jcXwC6+Hvs+vn3uiHbYZ4F90vh/m4hBLa9Qr6BmuxIvwxLYyYd5s8s/JQkHJBNeIqw1jcfuUfmc6GXowlHMh8zjjET6oVGNL2V2sGFne2OlTztcdw==</SignatureValue><KeyInfo><KeyValue><RSAKeyValue><Modulus>n3RnXcCDp20WFMoNNzt4s9fV12T5roRJlv+bshDfvJoMZfhyRnixgUfGAbrRlS1St/EcXFXD2MhRkF3CnMYIoeMOMuMyYtxr2sC2B5bDRMUMM/r9I4GP2nowUthCWKFIS1RPlM0YoVfKKMaH7bJii29sW+waBUulAKN2c+Gn5znaiOxRqIu4OL8f9DCHYpME5+Teek3SL95sH5GQhZq7CqTdM0fBw/FmLLx98SpBu7v8XapoTz6jJpyNozhcP/59mi/Fu4tT2rI2vD50Vx/0GlR9DNZ2py/iyPU7DG/3p1n1zluuRp3uXKjDfVKH7xDbXcMBJid22a3CPbuC2QJLow==</Modulus><Exponent>AQAB</Exponent></RSAKeyValue></KeyValue><X509Data><X509Certificate>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</X509Certificate><X509Certificate>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</X509Certificate><X509Certificate>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</X509Certificate></X509Data></KeyInfo><Object Id="ts-countersig"><X509Data><X509Certificate>MIIHIDCCBQigAwIBAgITMwAAAgTY4A4HlzJYmAABAAACBDANBgkqhkiG9w0BAQsFADB8MQswCQYDVQQGEwJVUzETMBEGA1UECBMKV2FzaGluZ3RvbjEQMA4GA1UEBxMHUmVkbW9uZDEeMBwGA1UEChMVTWljcm9zb2Z0IENvcnBvcmF0aW9uMSYwJAYDVQQDEx1NaWNyb3NvZnQgVGltZS1TdGFtcCBQQ0EgMjAxMDAeFw0yNTAxMzAxOTQyNDdaFw0yNjA0MjIxOTQyNDdaMIHLMQswCQYDVQQGEwJVUzETMBEGA1UECBMKV2FzaGluZ3RvbjEQMA4GA1UEBxMHUmVkbW9uZDEeMBwGA1UEChMVTWljcm9zb2Z0IENvcnBvcmF0aW9uMSUwIwYDVQQLExxNaWNyb3NvZnQgQW1lcmljYSBPcGVyYXRpb25zMScwJQYDVQQLEx5uU2hpZWxkIFRTUyBFU046OTYwMC0wNUUwLUQ5NDcxJTAjBgNVBAMTHE1pY3Jvc29mdCBUaW1lLVN0YW1wIFNlcnZpY2UwggIiMA0GCSqGSIb3DQEBAQUAA4ICDwAwggIKAoICAQDw3Sbcee2d66vkWGTIXhfGqqgQGxQXTnq44XlUvNzFSt7ELtO4B939jwZFX7DrRt/4fpzGNkFdGpc7EL5S86qKYv360eXjW+fIv1lAqDD31d/p8Ai9/AZz8M95zo0rDpK2csz9WAyR9FtUDx52VOs9qP3/pgpHvgUvD8s6/3KNITzms8QC1tJ3TMw1cRn9CZgVIYzw2iD/ZvOW0sbF/DRdgM8UdtxjFIKTXTaI/bJhsQge3TwayKQ2j85RafFFVCR5/ChapkrBQWGwNFaPzpmYN46mPiOvUxriISC9nQ/GrDXUJWzLDmchrmr2baABJevvw31UYlTlLZY6zUmjkgaRfpozd+Glq9TY2E3Dglr6PtTEKgPu2hM6v8NiU5nTvxhDnxdmcf8UN7goeVlELXbOm7j8yw1xM9IyyQuUMWkorBaN/5r9g4lvYkMohRXEYB0tMaOPt0FmZmQMLBFpNRVnXBTa4haXvn1adKrvTz8VlfnHxkH6riA/h2AlqYWhv0YULsEcHnaDWgqA29ry+jH097MpJ/FHGHxk+d9kH2L5aJPpAYuNmMNPB7FDTPWAx7Apjr/J5MhUx0i07gV2brAZ9J9RHi+fMPbS+Qm4AonC5iOTj+dKCttVRs+jKKuO63CLwqlljvnUCmuSavOX54IXOtKcFZkfDdOZ7cE4DioP1QIDAQABo4IBSTCCAUUwHQYDVR0OBBYEFBp1dktAcGpW/Km6qm+vu4M1GaJfMB8GA1UdIwQYMBaAFJ+nFV0AXmJdg/Tl0mWnG1M1GelyMF8GA1UdHwRYMFYwVKBSoFCGTmh0dHA6Ly93d3cubWljcm9zb2Z0LmNvbS9wa2lvcHMvY3JsL01pY3Jvc29mdCUyMFRpbWUtU3RhbXAlMjBQQ0ElMjAyMDEwKDEpLmNybDBsBggrBgEFBQcBAQRgMF4wXAYIKwYBBQUHMAKGUGh0dHA6Ly93d3cubWljcm9zb2Z0LmNvbS9wa2lvcHMvY2VydHMvTWljcm9zb2Z0JTIwVGltZS1TdGFtcCUyMFBDQSUyMDIwMTAoMSkuY3J0MAwGA1UdEwEB/wQCMAAwFgYDVR0lAQH/BAwwCgYIKwYBBQUHAwgwDgYDVR0PAQH/BAQDAgeAMA0GCSqGSIb3DQEBCwUAA4ICAQBecv6sRw2HTLMyUC1WJJ+FR+DgA9Jkv0lGsIt4y69CmOj8R63oFbhSmcdpakxqNbr8v9dyTb4RDyNqtohiiXbtrXmQK5X7y/Q++F0zMotTtTpTPvG3eltyV/LvO15mrLoNQ7W4VH58aLt030tORxs8VnAQQF5BmQQMOua+EQgH4f1F4uF6rl3EC17JBSJ0wjHSea/n0WYiHPR0qkz/NRAf8lSUUV0gbIMawGIjn7+RKyCr+8l1xdNkK/F0UYuX3hG0nE+9Wc0L4A/enluUN7Pa9vOV6Vi3BOJST0RY/ax7iZ45leM8kqCw7BFPcTIkWzxpjr2nCtirnkw7OBQ6FNgwIuAvYNTU7r60W421YFOL5pTsMZcNDOOsA01xv7ymCF6zknMGpRHuw0Rb2BAJC9quU7CXWbMbAJLdZ6XINKariSmCX3/MLdzcW5XOycK0QhoRNRf4WqXRshEBaY2ymJvHO48oSSY/kpuYvBS3ljAAuLN7Rp8jWS7t916paGeE7prmrP9FJsoy1LFKmFnW+vg43ANhByuAEXq9Cay5o7K2H5NFnR5wj/SLRKwK1iyUX926i1TEviEiAh/PVyJbAD4koipig28p/6HDuiYOZ0wUkm/a5W8orIjoOdU3XsJ4i08CfNp5I73CsvB5QPYMcLpF9NO/1LvoQAw3UPdL55M5HQ==</X509Certificate><X509Certificate>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</X509Certificate></X509Data><CounterSignature ts-format="cms-timestamp-message" xmlns="http://schemas.microsoft.com/xmldsig/timestamp/2003">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</CounterSignature></Object></Signature></doc>
