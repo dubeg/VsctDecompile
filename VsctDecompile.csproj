@@ -16,26 +16,4 @@
 	<ItemGroup>
 	  <PackageReference Include="System.Configuration.ConfigurationManager" Version="9.0.8" />
 	</ItemGroup>
-	<ItemGroup>
-	  <Compile Update="commandtable\Resources.Designer.cs">
-	    <DesignTime>True</DesignTime>
-	    <AutoGen>True</AutoGen>
-	    <DependentUpon>Resources.resx</DependentUpon>
-	  </Compile>
-	  <Compile Update="commandtable\SharedResources.Designer.cs">
-	    <DesignTime>True</DesignTime>
-	    <AutoGen>True</AutoGen>
-	    <DependentUpon>SharedResources.resx</DependentUpon>
-	  </Compile>
-	</ItemGroup>
-	<ItemGroup>
-		<EmbeddedResource Update="commandtable\Resources.resx">
-		  <Generator>ResXFileCodeGenerator</Generator>
-		  <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-		</EmbeddedResource>
-		<EmbeddedResource Update="commandtable\SharedResources.resx">
-		  <Generator>ResXFileCodeGenerator</Generator>
-		  <LastGenOutput>SharedResources.Designer.cs</LastGenOutput>
-		</EmbeddedResource>
-	</ItemGroup>
 </Project>

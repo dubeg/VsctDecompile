@@ -1,10 +1,6 @@
 ﻿using Microsoft.VisualStudio.CommandTable;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace VsctDecompile; 
 
@@ -25,26 +21,17 @@ internal class Program {
         }
 
         var ct = new CommandTable();
-        var messageProcessor = new CommandLineMessageProcessor(verbose: false);
-        if (ct.Read(sourceFile, messageProcessor) && messageProcessor.ErrorsCount == 0) {
+        var messageProcessor = new SimpleMessageProcessor();
+        if (ct.Read(sourceFile, messageProcessor) && messageProcessor.Errors.Count == 0) {
             var sourceFileAsCtSym = Path.ChangeExtension(sourceFile, ".ctsym");
             ct.ImportSymbols(sourceFileAsCtSym, null, null);
             if (!ct.ContainsSymbols) {
                 var message = $"No symbols found in '{sourceFileAsCtSym}'.";
                 messageProcessor.Error(0, null, 0, 0, message);
             }
-            var outputName = Path.ChangeExtension(sourceFile, ".vsct");
+            // Save to disk:
+            // var outputName = Path.ChangeExtension(sourceFile, ".vsct");
             // ct.Save(outputName, new SaveOptions(SaveOptions.SaveFormat.XML), messageProcessor);
         }
-
-        // --
-        //var compiler = new Compiler();
-        //compiler.SourceFile = sourceFile;
-        //var success = compiler.Compile();
-        //if (!success) {
-        //    Console.WriteLine("Compilation failed.");
-        //} else {
-        //    Console.WriteLine("Compilation succeeded.");
-        //}
     }
 }
