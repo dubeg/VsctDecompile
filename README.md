@@ -10,7 +10,7 @@ My goal is to use it to read the commands, buttons and icons defined in Visual S
 
 
 ## Related resources
-https://github.com/AmpScm/AnkhSVN/blob/dcc40c3328dba2b7a18f1241019f42a2750c1455/src/tools/Ankh.BitmapExtractor/Program.cs#L13
-https://stackoverflow.com/questions/21545910/can-i-add-my-add-in-into-analyze-section-of-visual-studio-menu
-https://marketplace.visualstudio.com/items?itemName=VisualStudioBlog.VSCTPowertoy
-https://www.dotnetportal.cz/blogy/15/Null-Reference-Exception/5194/Visual-Studio-Package
+- https://github.com/AmpScm/AnkhSVN/blob/dcc40c3328dba2b7a18f1241019f42a2750c1455/src/tools/Ankh.BitmapExtractor/Program.cs#L13
+- https://stackoverflow.com/questions/21545910/can-i-add-my-add-in-into-analyze-section-of-visual-studio-menu
+- https://marketplace.visualstudio.com/items?itemName=VisualStudioBlog.VSCTPowertoy
+- https://www.dotnetportal.cz/blogy/15/Null-Reference-Exception/5194/Visual-Studio-Package
